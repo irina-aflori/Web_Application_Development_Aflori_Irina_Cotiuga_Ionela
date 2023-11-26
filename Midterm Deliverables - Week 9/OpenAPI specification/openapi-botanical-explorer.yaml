@@ -1,0 +1,887 @@
+openapi: 3.0.3
+info:
+  title: Swagger Botanical Garden Smart Explorer - OpenAPI 3.0
+  description: |-
+    This is a sample Botanical Garden Smart Explorer based on the OpenAPI 3.0 specification.  You can find out more about
+    Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
+    
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://botanicalexplorer.swagger.io/api/v3
+tags:
+  - name: users
+    description: Everything about an User
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: events
+    description: Operations about Events
+  - name: plants
+    description: Operations about Plants
+  - name: fauna
+    description: Operations about Fauna
+  - name: markers
+    description: Everything about Markers
+  - name: taxes
+    description: Everything about Taxes
+paths:
+  /users:
+    put:
+      tags:
+        - users
+      summary: Update an existing user
+      description: Update an existing user by Id
+      operationId: updateUser
+      requestBody:
+        description: Update an existent user in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'          
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: User not found
+        '405':
+          description: Validation exception
+      security:
+        - botanicalexp_auth: []
+    post:
+      tags:
+        - users
+      summary: Add a new user to the database
+      description: Add a new user to the database
+      operationId: addUser
+      requestBody:
+        description: Create a new user in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'  
+        '201':
+          description: Created
+        '405':
+          description: Invalid input
+      security:
+        - botanicalexp_auth: []
+  /users/{userId}:
+    get:
+      tags:
+        - users
+      summary: Find user by ID
+      description: Returns a single user
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: User not found
+      security:
+        - botanicalexp_auth: []
+    delete:
+      tags:
+        - users
+      summary: Deletes an user
+      description: delete an user
+      operationId: deleteUser
+      parameters:
+        - name: userId
+          in: path
+          description: Id of the user that needs to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid user value
+      security:
+        - botanicalexp_auth: []
+  /users/{userId}/seasons:
+    patch:
+      tags:
+        - users
+      summary: Update an existing user by adding his favorite seasons
+      description: Returns a single user
+      operationId: updateUserWithSeasons
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: seasons
+          in: query
+          description: The seasons to be added
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: User not found or invalid seasons value
+      security:
+        - botanicalexp_auth: []
+  /users/{userId}/favoriteCategories:
+    patch:
+      tags:
+        - users
+      summary: Update an existing user by adding his favorite categories of plants and fauna
+      description: Returns a single user
+      operationId: updateUserWithPlantAndFaunaCategories
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: favoriteCategories
+          in: query
+          description: The categories of plants and fauna to be added
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: User not found or invalid category of plants/fauna value
+      security:
+        - botanicalexp_auth: []
+  /events: 
+    get:
+      tags:
+        - events
+      summary: Find all events 
+      description: Returns all events that exist in the database
+      operationId: getEvents
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+        '404':
+          description: Events not found
+  /events/{eventId}/feedback:
+    patch:
+      tags:
+        - events
+      summary: Update an existing event by adding a feedback
+      description: Update an existing event by Id
+      operationId: updateFeedbackEventById
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update an existent event in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'          
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Event not found
+        '405':
+          description: Validation exception
+  /events/{eventId}/joined:
+    patch:
+      tags:
+        - events
+      summary: Update an existing event by adding a person who wants to join the event
+      description: Update an existing event by Id
+      operationId: updateJoinedEventById
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update an existent event in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'          
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Event not found
+        '405':
+          description: Validation exception
+  /plants: 
+    get:
+      tags:
+        - plants
+      summary: Find all plants 
+      description: Returns all plants that exist in the database
+      operationId: getPlants
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plant'
+        '404':
+          description: Plants not found
+  /plants/categories: 
+    get:
+      tags:
+        - plants
+      summary: Find all plants categories
+      description: Returns all plants categories that exist in the database
+      operationId: getPlantsCategories
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlantCategory'
+        '404':
+          description: Plants categories not found
+  /plants/categories/{plantCategoryId}: 
+    get:
+      tags:
+        - plants
+      summary: Find plants from a specific category
+      description: Returns all plants from a specific category
+      operationId: getPlantsByCategoryId
+      parameters:
+        - name: plantCategoryId
+          in: path
+          description: ID of plant category to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plant'
+        '404':
+          description: Plants from this category not found
+  /plants/{plantId}:
+    get: 
+      tags: 
+        - plants
+      summary: Find plant by ID
+      description: Returns a single plant
+      operationId: getPlantById
+      parameters:
+        - name: plantId
+          in: path
+          description: ID of plant to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plant'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Plant not found  
+  /plants/findBySeasons:
+    get: 
+      tags: 
+        - plants 
+      summary: Find Plants by seasons
+      description: Multiple seasons can be provided with comma separated strings. Use season1, season2, season3 for testing.
+      operationId: findPlantsBySeasons
+      parameters:
+        - name: seasons
+          in: query
+          description: Seasons to filter by
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plant'          
+        '400':
+          description: Invalid season value
+  /fauna:
+    get:
+      tags:
+        - fauna
+      summary: Find fauna
+      description: Returns fauna that exist in the database
+      operationId: getFauna
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Fauna'
+        '404':
+          description: Fauna not found
+  /fauna/categories:
+    get:
+      tags:
+        - fauna
+      summary: Find fauna categories
+      description: Returns fauna categories that exist in the database
+      operationId: getFaunaCategories
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FaunaCategory'
+        '404':
+          description: Fauna categories not found
+  /fauna/categories/{faunaCategoryId}: 
+    get:
+      tags:
+        - fauna
+      summary: Find fauna from a specific category
+      description: Returns fauna from a specific category
+      operationId: getFaunaByCategoryId
+      parameters:
+        - name: faunaCategoryId
+          in: path
+          description: ID of fauna category to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Fauna'
+        '404':
+          description: Fauna from this category not found
+  /fauna/{faunaId}:
+    get: 
+      tags: 
+        - fauna
+      summary: Find fauna by ID
+      description: Returns a single element of fauna
+      operationId: getFaunaById
+      parameters:
+        - name: faunaId
+          in: path
+          description: ID of a specific fauna element to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fauna'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Fauna element not found  
+  /fauna/findBySeasons:
+    get: 
+      tags: 
+        - fauna 
+      summary: Find fauna by seasons
+      description: Multiple seasons can be provided with comma separated strings. Use season1, season2, season3 for testing.
+      operationId: findFaunaBySeasons
+      parameters:
+        - name: seasons
+          in: query
+          description: Seasons to filter by
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Fauna'          
+        '400':
+          description: Invalid season value
+  /markers:
+    get:
+      tags:
+        - markers
+      summary: Find all markers for Iasi Botanical Garden
+      description: Returns all markers that exist in the database
+      operationId: getMarkers
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MapMarker'
+        '404':
+          description: Map Markers not found
+  /taxes:
+    get: 
+      tags: 
+        - taxes
+      summary: Find all taxes available for Iasi Botanical Garden
+      description: Returns all taxes that exist in the database
+      operationId: getTaxes
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tax'
+        '404':
+          description: Taxes not found
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        firstName:
+          type: string
+          example: "John"
+        lastName:
+          type: string
+          example: "James"
+        visitorType:
+          type: string
+          enum:
+            - NORMAL_VISITOR
+            - GROUP
+            - ADVANCED_BOTANIST
+        seasonFavorites: 
+          type: array
+          items: 
+            type: string
+          example: ["SPRING", "SUMMER", "AUTUMN", "WINTER"]
+          uniqueItems: true
+        faunaCategory: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/FaunaCategory'
+          uniqueItems: true
+        plantsCategory: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/PlantCategory'
+          uniqueItems: true
+      required: 
+        - id
+        - visitorType
+      xml:
+        name: user
+    Event:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: "The annual Chrysanthemums autumnal exhibition"
+        description:
+          type: string
+          example: "The Iasi Botanical Garden is hosting its 13th chrysanthemum exhibition"
+        timeStart:
+          type: string
+          example: "08:00"
+        timeStop:
+          type: string
+          example: "10:00"
+        date:
+          type: string
+          format: date
+          example: 2024-02-21
+        joined: 
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+          uniqueItems: true
+        capacity:
+          type: integer
+          format: int64
+          example: 20
+        feedback: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Feedback'
+          uniqueItems: true
+      required: 
+        - id
+        - name
+        - timeStart
+        - timeStop
+        - date
+      xml:
+        name: event
+    Feedback:
+      type: object
+      properties:
+          id:
+            type: integer
+            format: int64
+            example: 1
+          comment: 
+            type: string
+            example: A very well organized event!
+          created: 
+            type: string
+            format: date
+            example: 2024-03-11
+          author: 
+            $ref: '#/components/schemas/User'
+          photo: 
+            type: string
+            format: binary
+      xml:
+        name: feedback
+    PlantCategory:
+      type: object
+      properties:
+          id:
+            type: integer
+            format: int64
+            example: 1
+          name: 
+            type: string
+            example: "Roses"
+          plants:
+            type: array
+            uniqueItems: true
+            items:
+              $ref: '#/components/schemas/Plant'
+      required: 
+        - id
+        - name
+      xml:
+        name: plantCategory
+    FaunaCategory:
+      type: object
+      properties:
+          id:
+            type: integer
+            format: int64
+            example: 1
+          name: 
+            type: string
+            example: "Animals"
+          fauna:
+            type: array
+            uniqueItems: true
+            items:
+              $ref: '#/components/schemas/Fauna'
+      required: 
+        - id
+        - name
+      xml:
+        name: faunaCategory
+    Plant:
+      type: object
+      properties:
+          id:
+            type: integer
+            format: int64
+            example: 1
+          speciesCategory: 
+            type: array
+            items:
+              $ref: '#/components/schemas/PlantCategory'
+          plantName:
+            type: string
+            example: "Rosa 'Flower Carpet Red'"
+          description:
+            type: string
+            example: "A great deciduous ground cover rose which forms low mounds of growth to around 70cm tall and 1m wide."
+          flowersDescription: 
+            type: string
+            example: "Small flowered groundcover rose which produces small single deep red flowers with yellow centre in clusters throughout spring and summer. Foliage is dark green and glossy and is often tinged red when it first unfurls. It matures to dark green with burgundy edges."
+          site: 
+            type: string
+            example: "This rose will perform at its best in full sun with moist but well-drained soil but will tolerate part shade. Good air circulation helps prevent pests and diseases. Drought tolerant once established."
+          maintananceTips: 
+            type: string
+            example: "The first summer and autumn after planting is critical for young plants; water thoroughly during dry periods. A good rule of thumb is to give your roses one deep watering each week in dry times this will ensure the roots look for water themselves."
+          diseases: 
+            type: string
+            example: "This flower carpet rose has good resistance to the common rose diseases. However, it may still be affected by black spot, aphids and powdery mildew."
+          soilPreparation: 
+            type: string
+            example: "Always choose healthy well grown plants and plant after autumn rains as the soil is moist and warm and allows plants to become established before winter. This enables them to withstand dry periods during the following summer."
+          seasonOccurrence: 
+            type: array
+            items: 
+              type: string
+              example: ["SPRING", "SUMMER", "AUTUMN", "WINTER"]
+            uniqueItems: true
+          plantPhoto: 
+            type: string
+            format: binary
+          location: 
+            type: string
+            example: "Iasi Botanical Garden"
+      required: 
+        - id
+        - speciesCategory
+        - plantName
+      xml:
+        name: plant
+    Fauna:
+      type: object
+      properties:
+          id:
+            type: integer
+            format: int64
+            example: 1
+          speciesCategory: 
+            $ref: '#/components/schemas/FaunaCategory'
+          faunaName:
+            type: string
+            example: "Turtle"
+          description: 
+             type: string
+             example: "The pond slider (Trachemys scripta) is a species of common, medium-sized, semiaquatic turtle. Three subspecies are described, the most recognizable of which is the red-eared slider, which is popular in the pet trade and has been introduced to other parts of the world by people releasing it to the wild."
+          seasonOccurrence: 
+            type: array
+            items: 
+              type: string
+              example: ["SPRING", "SUMMER", "AUTUMN", "WINTER"]
+              uniqueItems: true
+          faunaPhoto: 
+            type: string
+            format: binary
+          location: 
+            type: string
+            example: "Iasi Botanical Garden"
+      required: 
+        - id
+        - speciesCategory
+        - faunaName
+      xml:
+        name: fauna  
+    MapMarker:
+      type: object
+      properties:
+          id:
+            type: integer
+            format: int64
+            example: 1
+          coordinates:
+            type: array
+            items: 
+              type: number
+            example: [1000, 1000]
+          markerType: 
+            type: string
+            enum:
+              - PLANT
+              - FAUNA
+          district: 
+            type: string
+            example: "Entrance of Iasi Botanical Garden"
+      required: 
+        - id
+        - coordinates
+        - markerType
+      xml:
+        name: marker  
+    Tax: 
+      type: object
+      properties:
+          id:
+            type: integer
+            format: int64
+            example: 1
+          price: 
+            type: number
+            example: 20.00
+          currency: 
+            type: string
+            example: "RON"
+          taxType: 
+            type: string
+            example: "Individual ticket admission rates for floral exhibitions and events"
+      required: 
+        - id
+        - price
+        - currency
+        - taxType
+      xml:
+        name: tax  
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
+  requestBodies:
+    User:
+      description: User object that needs to be added to the database
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/User'
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+  securitySchemes:
+    botanicalexp_auth:
+      type: http
+      scheme: basic
+  
+security:
+  - botanicalexp_auth: [] 
