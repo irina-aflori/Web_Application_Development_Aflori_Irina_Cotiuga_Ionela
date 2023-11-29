@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Technical Report Bogx (Botanical gardens smart explorer)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body prefix="schema: http://schema.org" class="background">
+    <article itemscope itemtype="https://schema.org/ScholarlyArticle" class="alignment">
+        <header>
+            <h1 itemprop="headline">Technical Report Bogx (Botanical gardens smart explorer)</h1>
+        </header>
+
+        <div role="contentinfo">
+            <dl>
+                <dt>Authors</dt>
+                <dd itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    Aflori Irina
+                    &amp;
+                    Cotiugă Ionela
+                </dd>
+                <dt>Affiliation</dt>
+                <dd itemprop="organization" itemscope itemtype="https://schema.org/Organization">Faculty of Computer Science, "Alexandru Ioan Cuza" University in Iași</dd>
+            </dl>
+        </div>
+        <section id="index">
+            <h2 class="title">Table of contents</h2>
+            <dl>
+                <dt><a class="content" href="#abstract">Abstract</a></dt>
+                <dd></dd>
+
+                <dt><a class="content" href="#introduction">1. Introduction</a></dt>
+                <dd><a class="content" href="#purpose">1.1 Motivation</a></dd>
+                <dd><a  class="content" href="#product-scope">1.2 Purpose</a></dd>
+
+                <dt><a class="content" href="#overall-description">2. Description</a></dt>
+                <dd><a class="content" href="#user-classes">2.1 User types and features</a></dd>
+                <dd><a class="content" href="#operating-environment">2.2 Operating system</a></dd>
+
+                <dt><a class="content" href="#technologies-libraries">3. Technologies and libraries used</a></dt>
+                <dd><a class="content" href="#app-architecture">3.1 App Architecture</a></dd>
+                <dd><a class="content" href="#storage-system">3.2 Persistent Storage System</a></dd>
+                <dd><a class="content" href="#api-specification">3.3 REST API specification</a></dd>
+
+                <dt><a class="content" href="#interface-interaction">4. User interface interaction</a></dt>
+                <dd><a class="content" href="#landing-page">4.1 Landing Page</a></dd>
+                <dd><a class="content" href="#seasons-select">4.2 Favorite seasons Form Page</a></dd>
+                <dd><a class="content" href="#categories-select">4.3 Favorite categories of plants and fauna Form Page</a></dd>
+                <dd><a class="content" href="#map-interaction">4.4 Map Page</a></dd>
+                <dd><a class="content" href="#events-page">4.5 Events Page</a></dd>
+                <dd><a class="content" href="#join-event">4.6 Join an event Page</a></dd>
+                <dd><a class="content" href="#feedback-event">4.7 Add a feedback to an event Page</a></dd>
+
+                <dt><a class="content" href="#system-features">5. Requirements and characteristics of the system</a></dt>
+                <dd><a class="content" href="#functional-requirements">5.1 Functional requirements</a></dd>
+                <dd><a class="content" href="#nonfunctional-requirements">5.2 Non-Functional requirements</a></dd>
+                <dt><a class="content" href="#linked-data-explanation">6. How this solution conforms to the linked data principles</a>
+                </dt>
+                <dd></dd>
+                <dt><a class="content" href="#conclusion">7. Conclusion</a></dt>
+                <dd></dd>
+            </dl>
+        </section>
+
+        <section itemscope itemtype="https://schema.org/Article" role="doc-abstract">
+            <h2 itemprop="abstract" id="abstract" class ="title">Abstract</h2>
+            <p itemprop="description">This document is intended for Bogx application users and provides detailed explanations regarding how the
+                system is structured, all of its functionalities, and the requirements that a potential client needs
+                to meet in order to use it.</p>
+        </section>
+
+        <section itemscope itemtype="https://schema.org/Article" role="doc-introduction">
+            <h2 class ="title" id="introduction">1. Introduction</h2>
+            <section>
+                <h3 id="purpose">1.1 Motivation</h3>
+                <p itemprop="motivation">Bogx (Botanical Gardens Smart Explorer) is a Web application designed to offer users interested in
+                    the botanical field an innovative, intuitive, and easy way to access information about plants and
+                    fauna, filtered according to their own preferences, as well as a method to interact with scheduled
+                    events at the Botanical Garden in Iasi. The map of the Iasi Botanical Garden provided in the
+                    application offers an overview of the location of plants and fauna in that area.</p>
+            </section>
+            <section>
+                <h3 id="product-scope">1.2 Purpose</h3>
+                <p itemprop="purpose">The main purpose of the application is to provide a digital and modern way of displaying educational
+                    information about various species of plants and animals, allowing users to explore the Iasi
+                    Botanical Garden through an interactive map.</p>
+            </section>
+        </section>
+
+        <section itemscope itemtype="https://schema.org/Article" role="doc-description">
+            <h2 id="overall-description" class ="title">2. Description</h2>
+            <section>
+                <h3 id="user-classes">2.1 User types and features</h3>
+            </section>
+            <section>
+                <h3 id="operating-environment">2.2 Operating system</h3>
+            </section>
+        </section>
+
+        <section itemscope itemtype="https://schema.org/Article" role="doc-technologies">
+            <h2 id="technologies-libraries" class ="title">3. Technologies and libraries used</h2>
+            <section>
+                <h3 id="app-architecture">3.1 App Architecture</h3>
+                <img class="img1" src="app-architecture-diagram.png" alt="Architecture diagram">
+                <p class="caption">App Architecture diagram</p>
+            </section>
+            <section>
+                <h3 id="storage-system">3.2 Persistent Storage System</h3>
+                <p itemprop="storage">At the storage and data management level of the Web application, we chose a NoSQL database, called
+                    MongoDB. We built the data models, taking into consideration both the program's needs and a
+                    well-defined structure of the documents and how the relationships between data are represented.</p>
+                <p>The following list provides an overview of the collections required in developing the structure for
+                    the database:</p>
+                <ul>
+                    <li>
+                        User: a collection that stores all useful information about an user (what type of user he is,
+                        what are his favorite seasons, what are his favorite categories of plants and fauna, some
+                        identification details like last name and first name).
+                    </li>
+                    <li>
+                        PlantCategory: a collection that considers the name of the plant category and a list of plants
+                        that are part of that category.
+                    </li>
+                    <li>
+                        Plant: a collection that stores the necessary details for displaying information about a plant
+                        (name, description, picture of the plant, its location, the seasons in which it appears, soil
+                        preparation, maintenance tips, description of the flowers of that plant, diseases that may
+                        appear, plant categories to which it belongs).
+                    </li>
+                    <li>
+                        FaunaCategory: a collection that considers the name of the fauna category and a list of fauna
+                        elements (different species of birds/animals/insect) that are part of that category.
+                    </li>
+                    <li>
+                        Fauna: a collection that consists of name of the fauna element, fauna category to which it
+                        belongs, a description, an image, its location and the seasons in which it appears.
+                    </li>
+                    <li>
+                        Event: a collection that stores all the events organized in the Botanical Garden. An event is
+                        defined by a name, a description, the start time and the end time of the event, the date on
+                        which the event takes place, the people who registered for the event and any feedback comments
+                        that are offered to the event.
+                    </li>
+                    <li>
+                        Feedback: a collection that is used for an event. A feedback contains a comment, a picture, and
+                        the author who made the comment.
+                    </li>
+                    <li>
+                        MapMarker: a collection that stores all the markers that are displayed on the interactive map,
+                        having a district, some coordinates values, and what type of marker it is.
+                    </li>
+                    <li>
+                        Tax: a collection used to display all taxes and services available for visiting the Botanical
+                        Garden, specifying the price and what type of tax it is.
+                    </li>
+                </ul>
+                <img class="img2" src="data-models-diagram.png" alt="Data models diagram">
+                <p class="caption">Database diagram</p>
+            </section>
+            <section>
+                <h3 id="api-specification">3.3 REST API specification</h3>
+            </section>
+        </section>
+
+        <section itemscope itemtype="https://schema.org/Article" role="doc-user-interaction">
+            <h2 id="interface-interaction" class ="title">4. User interface interaction</h2>
+            <p>In this section, we will detail the most important pages of our application, creating a small guide for
+                users.</p>
+            <section>
+                <h3 id="landing-page">4.1 Landing Page</h3>
+                <p itemprop="mainPage">The main page, the entry point into the application, offers the user the possibility to choose what
+                    type of visitor they are: simple visitor, group of children, or advanced botanist. The users will
+                    click on one of the three options, and then they will be redirected to the next page. This page
+                    features a static horizontal header at the top containing the logo and the main menu of the website.
+                </p>
+                <img class="img3" src="1-figma-main-page.png" alt="Landing Page">
+            </section>
+            <section>
+                <h3 id="seasons-select">4.2 Favorite seasons Form Page</h3>
+                <p itemprop="seasons">On this page, the user selects their favorite seasons to filter all the events, plants, and fauna
+                    based on these choices. The user can check from one season to all the seasons displayed.</p>
+                <img class="img4" src="2-figma-season-selection.png" alt="Season selection">
+            </section>
+            <section>
+                <h3 id="categories-select">4.3 Favorite categories of plants and fauna Form Page</h3>
+                <p itemprop="categories">In this form, the user selects their preferred plant categories and types of fauna from those
+                    available for the Iasi Botanical Garden. Consequently, they will be able to discover detailed
+                    information about the chosen areas of interest through the interactive map or dedicated information
+                    display pages.</p>
+                <img class="img5" src="3-figma-favorite-plants.png" alt="Favorite plants">
+            </section>
+            <section>
+                <h3 id="map-interaction">4.4 Map Page</h3>
+                <p itemprop="map">This page illustrates the interactive map of the Botanical Garden in Iasi, where users can select a
+                    route from the entrance of the Botanical Garden to a chosen marked plant. Additionally, users can
+                    track areas marked with a specific marker to locate them more easily (for instance, the conifer zone
+                    is marked with specific markers on the left side of the Botanical Garden).</p>
+                <p itemprop="menu">On the right side of the image, the menu is visible, provided to users after they fill out all the
+                    data and forms mentioned in the previous pages. This menu illustrates all the pages that can be
+                    quickly accessed by users.</p>
+                <img class="img6" src="4-figma-map+menu.png" alt="Map">
+            </section>
+            <section>
+                <h3 id="events-page">4.5 Events Page</h3>
+                <p itemprop="events">The events page is divided into two categories: a list of scheduled events that will take place in
+                    the near future and a list of events which have already taken place. Therefore, users can see what
+                    types of events are organized at the Iasi Botanical Garden and can plan to participate in them. The
+                    types of organized events may include guided tours, exhibitions for certain plants, seasonal
+                    exhibitions, nature conservation events against pollution, events that teach how to plant or
+                    classify different types of plants, caring for the animals in the Botanical Garden, and more.</p>
+                <p itemprop="notification">The notification icon in the top bar is placed because users will possibly receive notifications of
+                    events that will take place in the near future.</p>
+                <img class="img7" src="5-figma-events.png" alt="Events list">
+            </section>
+            <section>
+                <h3 id="join-event">4.6 Join an event Page</h3>
+                <p itemprop="joinEvent">Users can fill out a form with their names to participate in a specific event. Generally, events
+                    organized in the Iasi Botanical Garden have a limited number of spots available. Therefore,
+                    registering for events through our application ensures an easy way to create a list of attendees,
+                    avoiding potential queues. Users can access this form by clicking on the 'Join' button attached to
+                    each event.</p>
+                <img class="img8" src="6-figma-join-event.png" alt="Event join form">
+            </section>
+            <section>
+                <h3 id="feedback-event">4.7 Add a feedback to an event Page</h3>
+                <p itemprop="feedbackEvent">Users can give a feedback for a past event they attended by filling out a form with their name,
+                    desired comments, and optionally attaching a photo from the event. This form can be accessed by
+                    users by clicking the 'Tell us about your experience' button available in the box of each past
+                    event.</p>
+                <img class="img9" src="7-figma-feedback-event.png" alt="Event feedback form">
+            </section>
+        </section>
+
+        <section itemscope itemtype="https://schema.org/Article" role="doc-app-functionalities">
+            <h2 id="interface-interaction" class ="title">5. Requirements and characteristics of the system</h2>
+            <section>
+                <h3 id="functional-requirements">5.1 Functional requirements</h3>
+                <section>
+                    <h4 id="feature1">5.1.1 Choosing the type of user</h4>
+                    <p itemprop="userType">It allows the user to choose what type of visitor they are. There are three possible categories:
+                        simple visitor, group of children, and advanced botanist. This choice is necessary for the
+                        following pages since the displayed information will be
+                        filtered based on the user's preferences. Every user needs to complete this form to have access
+                        to the main functionalities of the application.</p>
+                </section>
+                <section>
+                    <h4 id="feature2">5.1.2 Choosing favorite seasons</h4>
+                    <p itemprop="seasonSelect">It allows the user to select their favorite seasons (the seasons of interest to them) in the
+                        context of filtering data based on these seasons. Consequently, the user will have access to
+                        special seasonal events, read detailed information about plants and fauna associated with a
+                        particular season, and other useful tips. To submit the form and proceed to the next page, the
+                        user needs to select at least one option from the four provided. Otherwise, an error message
+                        <code>select_at_least_one_option</code>; will be displayed.</p>
+                </section>
+                <section>
+                    <h4 id="feature3">5.1.3 Selecting preferences for plants and fauna</h4>
+                    <p itemprop="categorySelect">The user fills out a form with all the categories of plants and categories of fauna that are of
+                        interest to them. These preferences provide the user with a personalized experience in the
+                        application, offering details about the plants and fauna belonging to the categories they've
+                        chosen. To submit the form and proceed to the next page, the user must select at least one
+                        option from the plant categories and one option from the fauna categories. Otherwise, an error
+                        message <code>select_at_least_one_option_per_category</code>; will be displayed.</p>
+                </section>
+                <section>
+                    <h4 id="feature4">5.1.4 View all details in “About” Page</h4>
+                    <p itemprop="about">Users can view some interesting information about the Bogx application, as well as about the Iasi
+                        Botanical Garden, such as a history of the garden (for those curious about the origins of the
+                        Botanical Garden) and contact details (phone number, address, etc.).</p>
+                </section>
+                <section>
+                    <h4 id="feature5">5.1.5 Visualization of the map of the Iasi Botanical Garden</h4>
+                    <p itemprop="map">The user has access to the interactive Google Maps of the Botanical Garden in Iasi, in order to
+                        visualize each area of interest within it. This way, they can explore and digitally locate
+                        specific plants, areas where certain insects are found, a greenhouse, etc.</p>
+                    <section>
+                        <h5 id="feature5-route-map">5.1.5.1 Access a route to a selected plant</h5>
+                        <p itemprop="mapRoute">To accurately locate a specific plant within the Iasi Botanical Garden, users can access the
+                            application to show them the route from the entrance of the Botanical Garden to the plant
+                            marked on the map that they want to see.</p>
+                    </section>
+                    <section>
+                        <h5 id="feature5-area-map">5.1.5.2 View marked areas on the map</h5>
+                        <p itemprop="mapArea">The most important plant and fauna categories will be displayed on the map with specific
+                            markers for better visibility and organization. For example, the coniferous zone will have
+                            multiple markers with an icon or suggestive image of coniferous plants. By clicking on a
+                            marker, the user will be able to read details about the selected plant or fauna element and
+                            can be redirected to its dedicated page, where they can access comprehensive information.
+                        </p>
+                    </section>
+                </section>
+                <section>
+                    <h4 id="feature6">5.1.6 Consult the list of taxes and services for visiting the Iasi Botanical
+                        Garden</h4>
+                    <p itemprop="taxes">All details regarding the pricing options for visiting the Iasi Botanical Garden can be accessed
+                        by users on a separate page. For instance, users can find information about prices for viewing
+                        an exhibition, visiting the greenhouses, participating in a pollution prevention event.</p>
+                </section>
+            </section>
+            <section>
+                <h3 id="nonfunctional-requirements">5.2 Non-Functional requirements</h3>
+                <p>Striving to create a web application that meets the standards of any user, we have considered several
+                    important quality attributes aimed at delivering the expected performance. We searched a solution
+                    that is efficient both in terms of time, providing quick responses to various requests, and in terms
+                    of costs. In the following sections we detail some important non-functional requirements of the Bogx
+                    application.</p>
+                <section>
+                    <h4 id="nonfunctional-requirements-portability">5.2.1 Portability</h4>
+                    <p itemprop="portability">The application can be launched from multiple operating systems and various devices (it is designed as a responsive Web application), proving its portability.</p>
+                </section>
+                <section>
+                    <h4 id="nonfunctional-requirements-scalability">5.2.2 Scalability</h4>
+                    <p itemprop="scalability">The increase in customer requests and the development of data volume maintain the program's performance consistently, offering the same response time through a Load Balancing process, where workload distribution across multiple resources is improved for effective instance management. This aspect demonstrates the scalability of the system.</p>
+                </section>
+                <section>
+                    <h4 id="nonfunctional-requirements-usability"> 5.2.3 Usability</h4>
+                    <p itemprop="usability">The application also focuses on the user interface, ensuring that it is user-friendly, intuitive, and accessible to its intended users.</p>
+                </section>
+                <section>
+                    <h4 id="nonfunctional-requirements-performance"> 5.2.4 Performance</h4>
+                    <p itemprop="performance">The application is characterized by the responsiveness, speed and efficiency of the system in different tasks or conditions. This includes response time, throughput and resource usage. These aspects are very important because impacts user satisfaction. Users expect web applications to load quickly and respond promptly to their interactions.</p>
+                </section>
+            </section>
+        </section>
+
+        <section itemscope itemtype="https://schema.org/Article" role="doc-app-linked-data">
+            <h2 id="linked-data-explanation" class ="title">6. How this solution conforms to the linked data principles</h2>
+            <div>Our application uses Apache Jena framework (which provides tools for creating a Semantic Web) and aims to fulfill several aspects that conforms to the linked data principles, such as:
+                <ul>
+                    <li>The data description is based on existing vocabularies, using FOAF, Review, the ones provided by schema.org, etc. in conjunction with other sources of interest such as DBpedia.</li>
+                    <li>Utilize RDF (Resource Description Framework) to represent data in a graph format. Apache Jena provides APIs for creating, parsing, and working with RDF data. Also, SPARQL (SPARQL Protocol and RDF Query Language) is used for querying and retrieving data from RDF graphs.</li>
+                    <li>Each resource in the system has a unique URI (Uniform Resource Identifier) that can be used to access and reference that resource.</li>
+                    <li>Bogx application creates links between related resources by using RDF properties to establish relationships. Apache Jena supports linking and navigating between interconnected resources.</li>
+                    <li>Use Apache Jena's serializers to output RDF data in various formats such as Turtle, N-Triples, or JSON-LD.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section itemscope itemtype="https://schema.org/Article" role="doc-conclusion">
+            <h2 id="conclusion" class ="title">7. Conclusion</h2>
+            <p itemprop="conclusion">The presented application named "Botanical Gardens Smart Explorer" proposes an interesting idea of displaying and interacting with the environment of the Botanical Garden in Iasi. It aims to facilitate the process of information and documentation, creating an optimal environment to delevop a passion for botanical gardens' cartography. The most important functionalities of the application include the use of an interactive map of the Botanical Garden, accessing and participating in organized events, and presenting information (filtered according to user preferences) about plants and fauna. The technologies used in the system are modern and aim towards developing a project that is portable, secure, and high-performing.</p>
+            <p itemprop="improvement">Being an application about botanical gardens' cartography, it could be improved and expanded by adding new functionalities. As future directions, we have considered implementing a method to enhance the app's accessibility by providing features for users with disabilities, such as audio descriptions, text-to-speech, or larger font options. Also, we would like to introduce support for multiple languages to cater to diverse visitors and tourists who speak different languages. An interesting idea is the implementation of a system of plant identification: a functionality that employs image recognition technology  where users can take photos of plants, and the app identifies and provides details about them.</p>
+        </section>
+    </article>
+</body>
+
+</html>

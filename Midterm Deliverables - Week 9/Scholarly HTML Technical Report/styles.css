@@ -1,0 +1,33 @@
+.img1{
+    height: 50%;
+    width: 50%;
+    margin-left: 27%;
+}
+.img2, .img3, .img4, .img5, .img6{
+    height: 35%;
+    width: 35%;
+    margin-left: 33%;
+}
+.img7, .img8, .img9{
+    height: 30%;
+    width: 30%;
+    margin-left: 33%;
+}
+.background {
+    background-color: rgb(241, 241, 241);
+}
+.content{
+    text-decoration: none;
+    font-size: medium;
+}
+.title{ 
+    display: inline-block;
+    border-bottom: 3px solid #030355;
+}
+.alignment{
+    padding-left: 1%;
+}
+.caption{
+    margin-top: 10px;
+    text-align: center;
+}
