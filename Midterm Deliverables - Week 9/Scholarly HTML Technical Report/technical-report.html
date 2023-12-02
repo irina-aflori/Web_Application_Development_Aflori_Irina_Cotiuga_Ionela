@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Technical Report Bogx (Botanical gardens smart explorer)</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js"></script>
+
 </head>
 
 <body prefix="schema: http://schema.org" class="background">
@@ -53,6 +56,10 @@
                 <dd><a class="content" href="#events-page">4.5 Events Page</a></dd>
                 <dd><a class="content" href="#join-event">4.6 Join an event Page</a></dd>
                 <dd><a class="content" href="#feedback-event">4.7 Add a feedback to an event Page</a></dd>
+                <dd><a class="content" href="#AI-plant-talk">4.8 Interact with a chatbot</a></dd>
+                <dd><a class="content" href="#plants-page">4.9 Plant category page</a></dd>
+                <dd><a class="content" href="#plant-information">4.10 Plant informations page</a></dd>
+                <dd><a class="content" href="#quizz-for-kids">4.11 Quizz for Kids</a></dd>
 
                 <dt><a class="content" href="#system-features">5. Requirements and characteristics of the system</a></dt>
                 <dd><a class="content" href="#functional-requirements">5.1 Functional requirements</a></dd>
@@ -94,18 +101,107 @@
             <h2 id="overall-description" class ="title">2. Description</h2>
             <section>
                 <h3 id="user-classes">2.1 User types and features</h3>
+                <p itemprop="user-types"> There are three types of users that can use the application: simple visitor, advanced botanist 
+                    and group of children. Users can access common functionalities, but there are also specific functionalities for each type of user.<br>
+                    <ul>
+                        <li>
+                            A simple visitor is any person who visits the Botanical Garden in Iasi and wants to find out more information about the 
+                            plants present in the garden, about the exhibitions in the garden and the events organized there.
+                        </li>
+                        <li>
+                            An advanced botanist is a professional or highly knowledgeable individual with expertise in the field of botany—the scientific study of plants. 
+                            He can add additional information about a plant, thus contributing to the quality of the content. It can 
+                            also ensure accuracy and correctness in the description of plants. This is essential to provide users with accurate and 
+                            reliable information.
+                        </li>
+                        <li>
+                            Group of children. The application can also be used by children, offering an interactive and engaging way to learn about plants. It 
+                            helps children learn to identify plants through visual characteristics so that they become aware of the diversity 
+                            of plants around them. The application also includes for children a quiz that tests the basic knowledge in the 
+                            field of botany, facilitating the assimilation of knowledge through play.
+                        </li>
+                    </ul>
+                </p>
+                <img class="img15" src="use-cases-diagram.png" alt="Use Cases Diagram">
+                <p class="caption">Use Cases Diagram</p>
             </section>
             <section>
                 <h3 id="operating-environment">2.2 Operating system</h3>
+                <p>
+                    The user can use any hardware platform, respectively operating system, which allows access to one of the following 
+                    browsers: Chrome, Microsoft Edge, Firefox, Internet Explorer, Safari.
+                </p>
             </section>
         </section>
 
         <section itemscope itemtype="https://schema.org/Article" role="doc-technologies">
             <h2 id="technologies-libraries" class ="title">3. Technologies and libraries used</h2>
             <section>
+                <ul>
+                    <li>
+                        React is used for builduing the user interface, to efficiently manage the UI state, handle user 
+                        inputs and update the interface in response to changes.
+                    </li>
+                    <li>
+                        Java serves as the backend programming language for the application, being well-suited for processing complex 
+                        tasks, handling data, and interfacing with external APIs, contributing to the overall functionality and performance of 
+                        the Bogx web application.
+                    </li>
+                    <li>
+                        RDF is employed for representing and linking data about plants in a semantic and structured format. It enables the
+                        creation of a knowledge graph that can be queried and analyzed for comprehensive plant data.
+                    </li>
+                    <li>
+                        SPARQL is a query language for RDF data. By using SPARQL queries, users can interact with the application to
+                        obtain detailed and customized information about plants, taxonomy, and other relevant data.
+                    </li>
+                    <li>
+                        Apache Jena Framework provides tools and libraries for RDF processing, storage, and querying. In Bogx application, 
+                        Apache Jena facilitates the handling of RDF data, allowing for efficient storage, retrieval, and manipulation of 
+                        plant-related information.
+                    </li>
+                    <li>
+                        Taxonomies are utilized for organizing and categorizing plant information in a hierarchical manner. This hierarchical 
+                        classification system helps users navigate and explore plant data more efficiently.
+                    </li>
+                    <li>
+                        Schema.org markup is incorporated to enhance the search engine visibility and understanding of the Bogx web 
+                        application. It provide search engines with structured information about plants, 
+                        enabling richer search results and potentially improving the discoverability of the content.
+                    </li>
+                    <li>
+                        The Google Maps JavaScript API enhances the application by providing an interactive map where users can explore 
+                        the botanical garden or specific regions with visual representations on a map. 
+                    </li>
+                    <li>
+                        The Bot Framework SDK enables the integration of a chatbot into the Bogx web application. This chatbot can assist 
+                        users in querying plant information, provide tips on gardening, or answer specific questions.
+                    </li>
+                </ul>
+            </section>
+            <section>
                 <h3 id="app-architecture">3.1 App Architecture</h3>
-                <img class="img1" src="app-architecture-diagram.png" alt="Architecture diagram">
-                <p class="caption">App Architecture diagram</p>
+                <p>
+                    The diagram presented below shows the architecture of the application and how it interacts with the technologies and libraries used.<br>
+                    The process begins with user interaction on their device through a web browser. <br> 
+                    The frontend application, built using React.js, handles the user interface and sends HTTP requests to the backend API. <br>
+                    The backend application, developed in Java, serves as the core of the application. It contains controllers for handling incoming 
+                    requests and service business logic for processing data. <br>
+                    The backend app interacts with the data layer, where data models are defined, and MongoDB is utilized for persistent storage. The data 
+                    layer handles changes to information based on user requests. <br>
+                    Simultaneously, the backend app communicates with a SPARQL processor. This processor is responsible for processing SPARQL 
+                    queries, initiating updates to the RDF store, and providing a comprehensive view of linked data. <br>
+                    The data layer also interacts with the SPARQL processor to perform SPARQL interrogations. This interaction helps in updating 
+                    data based on semantic queries, enriching the application's understanding of the data. <br>
+                    The SPARQL processor facilitates changes to the RDF store, ensuring that the linked data representation is updated in line 
+                    with the changes made in the data layer. <br>
+                    After updates are made in both the data layer and the RDF store, the results are communicated back to the backend Java application. <br>
+                    The backend app processes the results, consolidates the data from MongoDB and the RDF store, and prepares a JSON response. <br>
+                    The JSON response is then sent back to the frontend React.js application, which interprets the data and updates the user interface accordingly. <br>
+                    The final step involves sending the processed data back to the user's device, completing the user interaction loop.
+                </p>
+                <img class="img1" src="app-architecture-diagram.png" alt="Architecture Diagram">
+                <p class="caption">App Architecture Diagram</p>
             </section>
             <section>
                 <h3 id="storage-system">3.2 Persistent Storage System</h3>
@@ -157,11 +253,84 @@
                         Garden, specifying the price and what type of tax it is.
                     </li>
                 </ul>
-                <img class="img2" src="data-models-diagram.png" alt="Data models diagram">
-                <p class="caption">Database diagram</p>
+                <img class="img2" src="data-models-diagram.png" alt="Data models Diagram">
+                <p class="caption">Database Diagram</p>
             </section>
             <section>
                 <h3 id="api-specification">3.3 REST API specification</h3>
+                <p> 
+                    The REST API specification for Bogx web application, was created using Swagger and adhering to 
+                    the OpenAPI 3.0 standard. The REST API specification serves a pivotal role in enabling effective 
+                    communication between the frontend React.js application and the backend Java application. It defines the 
+                    endpoints, request-response formats, and the underlying data structures, providing a standardized interface 
+                    for interaction. <br> 
+
+                    The <strong>"/plants/categories"</strong> endpoint is used for retrieving and showcasing plant categories 
+                    stored in the database. Users can explore diverse plant categories and make selections to view associated 
+                    plants within their chosen category.<br>
+                    <br> Endpoint URL:
+                    <ul>
+                        <li>
+                            <strong>Path: /plants/categories</strong>
+                        </li>
+                    </ul>
+                    <br> HTTP Method: 
+                    <ul>
+                        <li>
+                            <strong>GET - Returns all plants categories that exist in the database.</strong>
+                        </li>
+                    </ul>
+                    <br> Parameters:
+                    <ul>
+                        <li>
+                            <strong>No parameters.</strong>
+                        </li>
+                    </ul>
+                    <br> Responses: 
+                    <ul>
+                        <li>
+                            <strong>Success Responses: 200 OK - Successful retrieval of plant categories.</strong>
+                            <br> <br> Example value:
+                            <pre><code class="json" id="jsonCode">
+[
+  {
+    "id": 1,
+    "name": "Roses",
+    "plants": [
+      {
+        "id": 1,
+        "speciesCategory": [
+          "string"
+        ],
+        "plantName": "Rosa 'Flower Carpet Red'",
+        "description": "A great deciduous ground cover rose which forms low mounds of growth to around 70cm tall and 1m wide.",
+        "flowersDescription": "Small flowered groundcover rose which produces small single deep red flowers with yellow centre in clusters throughout spring and summer. Foliage is dark green and glossy and is often tinged red when it first unfurls. It matures to dark green with burgundy edges.",
+        "site": "This rose will perform at its best in full sun with moist but well-drained soil but will tolerate part shade. Good air circulation helps prevent pests and diseases. Drought tolerant once established.",
+        "maintananceTips": "The first summer and autumn after planting is critical for young plants; water thoroughly during dry periods. A good rule of thumb is to give your roses one deep watering each week in dry times this will ensure the roots look for water themselves.",
+        "diseases": "This flower carpet rose has good resistance to the common rose diseases. However, it may still be affected by black spot, aphids and powdery mildew.",
+        "soilPreparation": "Always choose healthy well grown plants and plant after autumn rains as the soil is moist and warm and allows plants to become established before winter. This enables them to withstand dry periods during the following summer.",
+        "seasonOccurrence": [
+          [
+            "SPRING",
+            "SUMMER",
+            "AUTUMN",
+            "WINTER"
+          ]
+        ],
+        "plantPhoto": "string",
+        "location": "Iasi Botanical Garden"
+      }
+    ]
+  }
+]
+                                </code></pre>
+                        </li>
+                        <li>
+                            <strong>Error Responses: 404 Not Found - Plants categories not found.</strong> 
+                        </li>
+                    </ul>
+
+                </p>
             </section>
         </section>
 
@@ -232,10 +401,42 @@
                     event.</p>
                 <img class="img9" src="7-figma-feedback-event.png" alt="Event feedback form">
             </section>
+            <section>
+                <h3 id="AI-plant-talk">4.8 Interact with a chatbot</h3>
+                <p itemprop="AIPlantTalk">On this page, users can engage with the interactive chatbot, a virtual assistant designed to 
+                    provide valuable information about plants within the botanical garden. The chatbot is seamlessly integrated, allowing 
+                    users to ask questions, seek guidance on plant care, and explore various plant categories through natural language 
+                    interactions. </p>
+                <img class="img10" src="8-figma-AI-plant-talk.png" alt="AI plant talk">
+            </section>
+            <section>
+                <h3 id="plants-page">4.9 Plant category page</h3>
+                <p itemprop="plantsPage">The Plant Category Page offers a curated display of diverse plant categories. Users can 
+                    effortlessly explore each category, gaining insights into species details and each plant belonging to that category.    
+                </p>
+                <img class="img11" src="9-figma-plants-page.png" alt="Plants Page">
+            </section>
+            <section>
+                <h3 id="plant-information">4.10 Plant informations page</h3>
+                <p itemprop="PlantInformation">This page displays information about a specific plant such as: the scientific name, the family 
+                    it belongs to and specific characteristics such as maintenance and growth, pests and disease, flowers 
+                    and foliage and many others. In this way, the user can view each plant and its characteristics.
+                </p>
+                <img class="img12" src="10-figma-plant-informations.png" alt="Plant Information Page">
+            </section>
+            <section>
+                <h3 id="quizz-for-kids">4.11 Quizz for Kids</h3>
+                <p itemprop="QuizzForKids">This page is dedicated to the category of users: children. It offers a game with basic 
+                    questions in the field of botany, facilitating the assimilation of knowledge through play. The answers are
+                    associated with helpful images for better accuracy and to help children see visual examples.
+                </p>
+                <img class="img13" src="11-figma-quizz-for-kids-Q1.png" alt="Quizz for kids Q1">
+                <img class="img14" src="12-figma-quizz-for-kids-Q2.png" alt="Quizz for kids Q2">
+            </section>
         </section>
 
         <section itemscope itemtype="https://schema.org/Article" role="doc-app-functionalities">
-            <h2 id="interface-interaction" class ="title">5. Requirements and characteristics of the system</h2>
+            <h2 id="system-features" class ="title">5. Requirements and characteristics of the system</h2>
             <section>
                 <h3 id="functional-requirements">5.1 Functional requirements</h3>
                 <section>
@@ -298,6 +499,62 @@
                         by users on a separate page. For instance, users can find information about prices for viewing
                         an exhibition, visiting the greenhouses, participating in a pollution prevention event.</p>
                 </section>
+                <section>
+                    <h4 id="feature7">5.1.7 User interaction with an AI chat</h4>
+                    <p itemprop="chatAI"> The AI chat functionality enables users to pose queries about plants, gardening, or 
+                        specific botanical topics. The system then provides relevant and informative responses based on its 
+                        knowledge base. The functionality encourages a dynamic learning experience, where users can acquire 
+                        knowledge about plants through interactive conversations, making the interaction both educational and 
+                        enjoyable.</p>
+                </section>
+                <section>
+                    <h4 id="feature8">5.1.8 View the events page</h4>
+                    <p itemprop="events">Users can navigate to the Events Page to explore a comprehensive list of past, 
+                        present, and upcoming events within the botanical garden. The page provides a visually engaging 
+                        display of event details, allowing users to stay informed about the diverse activities and programs 
+                        hosted by the garden.</p>
+                    <section>
+                        <h5 id="feature8-adding-feedback-to-a-past-event">5.1.8.1 Add feedback to a past event</h5>
+                        <p itemprop="addFeedback">For users who have attended past events, the platform offers the capability to 
+                            provide feedback. This subfunctionality enables participants to share their thoughts, to add photos
+                            they took at the event, and suggestions regarding specific events. Adding feedback 
+                            contributes to the improvement of future events and enhances the overall engagement of the 
+                            botanical garden community.</p>
+                    </section>
+                    <section>
+                        <h5 id="feature8-registration-for-participation-in-a-scheduled-event">5.1.8.2 Registration for participation in a scheduled event</h5>
+                        <p itemprop="addFeedback">The platform facilitates seamless event participation by allowing users to register 
+                            for scheduled events directly from the Events Page. Users can access event details, such as date, time, and 
+                            activities, and complete a registration process to secure their spot. After registering for an event
+                            it will be automatically added to Google Calendar, and the user will receive a reminder with the details 
+                            of the event, on a date close to it.</p>
+                    </section>
+                    <section>
+                        <h4 id="feature9">5.1.9 View plant categories</h4>
+                        <p itemprop="plantCategories">This functionality provides users with an organized and visually appealing 
+                            presentation of diverse plant categories within the botanical garden. Users can navigate through 
+                            the interface to explore various categories, each offering a curated collection of plants. By clicking on 
+                            one of the displayed categories, the user will be redirected to a page that displays the plants included 
+                            in the chosen category.</p>
+                    </section>
+                    <section>
+                        <h4 id="feature10">5.1.10 View details about a chosen plant</h4>
+                        <p itemprop="detailsAboutAChosenPlant">By selecting an individual plant, users can access detailed 
+                            insights into its species, care tips, growth patterns, and unique characteristics.</p>
+                    </section>
+                    <section>
+                        <h4 id="feature11">5.1.11 View fauna categories</h4>
+                        <p itemprop="faunaCategories">It presents users an engaging and organized display of diverse fauna categories 
+                            within the botanical garden. Users can explore various categories, each offering a curated 
+                            collection of animals and other fauna inhabiting the garden. By clicking on one of the displayed categories, 
+                            the user will be redirected to a page that displays the animals included in the chosen category.</p>
+                    </section>
+                    <section>
+                        <h4 id="feature12">5.1.12 View details about a selected fauna element</h4>
+                        <p itemprop="faunaCategories">By selecting an individual element, users can access detailed information about its 
+                            species, behaviors, habitat, and unique characteristics.</p>
+                    </section>
+                </section>
             </section>
             <section>
                 <h3 id="nonfunctional-requirements">5.2 Non-Functional requirements</h3>
@@ -344,6 +601,15 @@
             <p itemprop="improvement">Being an application about botanical gardens' cartography, it could be improved and expanded by adding new functionalities. As future directions, we have considered implementing a method to enhance the app's accessibility by providing features for users with disabilities, such as audio descriptions, text-to-speech, or larger font options. Also, we would like to introduce support for multiple languages to cater to diverse visitors and tourists who speak different languages. An interesting idea is the implementation of a system of plant identification: a functionality that employs image recognition technology  where users can take photos of plants, and the app identifies and provides details about them.</p>
         </section>
     </article>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          document.querySelectorAll('code').forEach((block) => {
+            hljs.highlightBlock(block);
+          });
+        });
+      </script>
+
 </body>
 
 </html>

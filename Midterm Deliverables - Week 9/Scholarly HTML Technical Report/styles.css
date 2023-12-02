@@ -3,7 +3,7 @@
     width: 50%;
     margin-left: 27%;
 }
-.img2, .img3, .img4, .img5, .img6{
+.img2, .img3, .img4, .img5, .img6, .img10, .img11, .img12{
     height: 35%;
     width: 35%;
     margin-left: 33%;
@@ -13,6 +13,26 @@
     width: 30%;
     margin-left: 33%;
 }
+.img13{
+    display: inline-block;
+    height: 35%;
+    width: 35%;
+    margin-left: 14%;
+}
+
+.img14{
+    display: inline-block;
+    height: 35%;
+    width: 35%;
+    margin-left: 2%;
+}
+
+.img15{
+    height: 70%;
+    width: 70%;
+    margin-left: 12%;
+}
+
 .background {
     background-color: rgb(241, 241, 241);
 }
