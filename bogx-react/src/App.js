@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import "./App.css";
+import AppContext from "./appContext";
+import Home from "./app/views/home/Home";
+import SeasonPreferences from "./app/views/seasonPreferences/SeasonPreferences";
+import Map from "./app/views/map/Map";
+import Events from "./app/views/events/Events";
+import Taxes from "./app/views/taxes/Taxes";
+import Plants from "./app/views/plants/Plants";
+import history from "./history";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [user, setUser] = useState({});
+    return (
+        <AppContext.Provider value={{user, setUser}}>
+            <Router history={history}>
+                <div>
+                    <Routes>
+                        <Route exact path="/" element={<Home/>}/>
+                        <Route exact path="/season-preferences" element={<SeasonPreferences/>}/>
+                        <Route exact path="/map" element={<Map/>}/>
+                        <Route exact path="/events" element={<Events/>}/>
+                        <Route exact path="/taxes" element={<Taxes/>}/>
+                        <Route exact path="/plants" element={<Plants/>}/>
+                    </Routes>
+                </div>
+            </Router>
+        </AppContext.Provider>
+    );
+};
 
 export default App;
+

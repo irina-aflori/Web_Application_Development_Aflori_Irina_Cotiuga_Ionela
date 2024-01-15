@@ -1,0 +1,19 @@
+.plants {
+    background-color: #e0e4da;
+    min-height: 54vw;
+}
+
+#plants-title{
+    background-color: white;
+    border-radius: 10px;
+    color: #4A614A;
+    width: fit-content;
+    height: 30px;
+    font-size: large;
+    margin-left: 40%;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 3%;
+    font-style: oblique;
+}
