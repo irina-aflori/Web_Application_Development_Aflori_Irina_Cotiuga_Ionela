@@ -1,0 +1,73 @@
+.plant-species {
+    background-color: #e0e4da;
+    min-height: 54vw;
+}
+
+#plant-species-title{
+    background-color: white;
+    border-radius: 10px;
+    color: #4A614A;
+    width: fit-content;
+    height: 30px;
+    font-size: large;
+    margin-left: 31%;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    /*margin-top: 3%;*/
+    font-style: oblique;
+}
+/*#plant-species-img {*/
+/*    height: 180px;*/
+/*    width: 45%;*/
+/*    border-radius: 10px;*/
+/*    margin-left: 27%;*/
+/*}*/
+
+.title-box-plant-species{
+    /*height: 20px;*/
+    width: 45%;
+    /*border-radius: 5px;*/
+    margin-left: 30%;
+    background-image: url("plant-species.png");
+    background-size: 90%;
+    background-repeat: no-repeat;
+    padding-top: 14%;
+}
+.box-plant-species {
+    /*height: 180px;*/
+    height: fit-content;
+    margin: 40px;
+    width: 200px;
+    background-color: #E0E4DA;
+    box-shadow: 0 0 20px #253625;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: grid;
+    justify-content: center;
+    padding-left: 15px;
+}
+.box-plant-species:hover{
+    box-shadow: 0 0 30px #131e13;
+}
+.plant-category-name{
+    /*width: fit-content;*/
+    /*height: 25px;*/
+    background-color: white;
+    border-radius: 6px;
+    color: #4A614A;
+    font-weight: bold;
+    min-height: 30px;
+    height: fit-content;
+    font-size: medium;
+    padding: 5px;
+    margin-right: 7%;
+    text-align: center;
+}
+#plant-type-img{
+    height: 160px;
+    width: 180px;
+    object-fit: fill;
+    border-radius: 5px;
+    margin-bottom: 4%;
+}

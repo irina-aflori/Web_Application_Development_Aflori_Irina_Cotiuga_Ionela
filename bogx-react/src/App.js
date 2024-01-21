@@ -8,6 +8,7 @@ import Map from "./app/views/map/Map";
 import Events from "./app/views/events/Events";
 import Taxes from "./app/views/taxes/Taxes";
 import Plants from "./app/views/plants/Plants";
+import PlantSpecies from "./app/views/plantSpecies/PlantSpecies";
 import history from "./history";
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
                         <Route exact path="/events" element={<Events/>}/>
                         <Route exact path="/taxes" element={<Taxes/>}/>
                         <Route exact path="/plants" element={<Plants/>}/>
+                        <Route exact path="/plants-species" element={<PlantSpecies/>}/>
                     </Routes>
                 </div>
             </Router>

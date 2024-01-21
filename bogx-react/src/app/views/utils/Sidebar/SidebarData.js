@@ -5,7 +5,6 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
-import EmojiNatureIcon from '@mui/icons-material/EmojiNature';
 import MoneyIcon from '@mui/icons-material/Money';
 
 export const SidebarData = [
@@ -27,13 +26,8 @@ export const SidebarData = [
         subNav: [
             {
                 title: "Plants",
-                path: "/plants",
+                path: "/plants-species",
                 icon: <LocalFloristIcon/>
-            },
-            {
-                title: "Fauna",
-                path: "/",
-                icon: <EmojiNatureIcon/>
             }
         ]
     },
