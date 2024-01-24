@@ -2,3 +2,11 @@
     background-color: #e0e4da;
     min-height: 54vw;
 }
+.taxes-title{
+    color: #4A614A;
+    text-align: center;
+    margin-top: 3%;
+    font-style: oblique;
+}
+.table-taxes{
+}

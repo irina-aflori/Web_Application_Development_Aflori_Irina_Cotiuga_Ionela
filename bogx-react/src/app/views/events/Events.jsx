@@ -3,6 +3,7 @@ import "./Events.css";
 import Sidebar from "../utils/Sidebar/Sidebar";
 import Grid from "@material-ui/core/Grid";
 import {Button} from "@material-ui/core";
+import {withRouter} from "react-router-dom";
 
 const events = [
     {
@@ -81,4 +82,4 @@ class Events extends Component {
     }
 }
 
-export default Events;
+export default withRouter(Events);

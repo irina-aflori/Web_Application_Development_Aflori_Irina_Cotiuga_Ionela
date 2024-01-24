@@ -3,20 +3,6 @@
     min-height: 54vw;
 }
 
-/*#plants-title{*/
-/*    background-color: white;*/
-/*    border-radius: 10px;*/
-/*    color: #4A614A;*/
-/*    width: fit-content;*/
-/*    height: 30px;*/
-/*    font-size: large;*/
-/*    margin-left: 40%;*/
-/*    padding: 15px;*/
-/*    text-align: center;*/
-/*    font-weight: bold;*/
-/*    margin-top: 3%;*/
-/*    font-style: oblique;*/
-/*}*/
 .box-plants{
     height: fit-content;
     margin: 40px;
@@ -46,18 +32,18 @@
     width: fit-content;
     height: fit-content;
     font-size: large;
-    margin-left: 20%;
+    margin-left: 38%;
     padding: 10px;
     text-align: center;
     font-weight: bold;
     font-style: oblique;
+    margin-top: 1%;
 }
 .title-box-plants{
     width: 45%;
     margin-left: 30%;
-    background-size: 90%;
     background-repeat: no-repeat;
-    padding-top: 14%;
+    padding-top: 18%;
 }
 .plant-name{
     background-color: white;

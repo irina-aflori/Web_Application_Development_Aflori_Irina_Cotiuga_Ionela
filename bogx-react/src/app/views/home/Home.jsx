@@ -3,6 +3,7 @@ import "./Home.css";
 import Grid from "@material-ui/core/Grid";
 import history from "../../../history";
 import Sidebar from "../utils/Sidebar/Sidebar";
+import {withRouter} from "react-router-dom";
 
 class Home extends Component {
     render() {
@@ -46,4 +47,4 @@ class Home extends Component {
 
 }
 
-export default Home;
+export default withRouter(Home);

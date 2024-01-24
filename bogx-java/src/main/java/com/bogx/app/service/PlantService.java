@@ -19,7 +19,7 @@ public class PlantService {
         model = ModelFactory.createOntologyModel();
         FileManager.get().readModel(model, "D:\\Master\\an1\\Dezvoltarea_Aplicatiilor_Web\\Resurse_curs\\owl\\bogx_updated.rdf");
     }
-    public List<Plant> getPlantsData() {
+    public List<Plant> getPlantsData(String plantSpecies) {
         String queryString = "PREFIX : <http://www.semanticweb.org/irina/ontologies/2024/0/bogx#>"
                 + "PREFIX dbr: <http://dbpedia.org/resource/>"
                 + "SELECT ?plant ?plantName ?plantDescription ?plantImageURL "
@@ -28,7 +28,7 @@ public class PlantService {
                 + "         :plantName ?plantName ;"
                 + "         :plantDescription ?plantDescription ;"
                 + "         :plantImageURL ?plantImageURL ;"
-                + "         :isPartOf dbr:" + "Chrysanthemum" + " ."
+                + "         :isPartOf dbr:" + plantSpecies + " ."
                 + "}";
 
         Query query = QueryFactory.create(queryString);

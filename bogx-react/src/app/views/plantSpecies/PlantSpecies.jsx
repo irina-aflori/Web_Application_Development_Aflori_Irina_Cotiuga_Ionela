@@ -3,6 +3,7 @@ import "./PlantSpecies.css";
 import Sidebar from "../utils/Sidebar/Sidebar";
 import Grid from "@material-ui/core/Grid";
 import plantSpeciesService from "../../shared/services/plantSpeciesService";
+import { withRouter } from 'react-router-dom';
 
 class PlantSpecies extends Component {
     state = {
@@ -29,7 +30,7 @@ class PlantSpecies extends Component {
                     {this.state.plantSpeciesList && this.state.plantSpeciesList
                         .map((plantSpecies, index) => (
                     <Grid item xs={4}>
-                        <div className="box-plant-species">
+                        <div className="box-plant-species" onClick={ () => {this.props.history.push({pathname: '/plants', state: {plantSpeciesName: plantSpecies.plantSpeciesName, plantSpeciesImage: plantSpecies.plantSpeciesImageURL}, search: new URLSearchParams({[plantSpecies]: plantSpecies.plantSpeciesName }).toString()})}}>
                             <img src={plantSpecies.plantSpeciesImageURL} alt="plant-type-img" id="plant-type-img"/>
                             <div className="plant-category-name">{plantSpecies.plantSpeciesName}</div>
                         </div>
@@ -38,4 +39,4 @@ class PlantSpecies extends Component {
             </div>
         )}
 }
-export default PlantSpecies;
+export default withRouter(PlantSpecies);

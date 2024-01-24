@@ -10,15 +10,6 @@ class PlantSpeciesService {
                 return Promise.reject(err);
             });
     };
-    getPlants = () => {
-        return plantSpeciesRepository.getPlants()
-            .then((res) => {
-                return res;
-            })
-            .catch((err) => {
-                return Promise.reject(err);
-            });
-    };
 }
 
 export default new PlantSpeciesService();

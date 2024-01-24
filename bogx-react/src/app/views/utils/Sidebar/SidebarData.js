@@ -19,17 +19,17 @@ export const SidebarData = [
         icon: <PinDropIcon/>
     },
     {
-        title: "Botanical Info",
-        icon: <ListAltIcon/>,
-        iconClosed: <KeyboardArrowDownIcon/>,
-        iconOpened: <KeyboardArrowUpIcon/>,
-        subNav: [
-            {
-                title: "Plants",
+        // title: "Botanical Info",
+        // icon: <ListAltIcon/>,
+        // iconClosed: <KeyboardArrowDownIcon/>,
+        // iconOpened: <KeyboardArrowUpIcon/>,
+        // subNav: [
+        //     {
+                title: "Botanical Info Plants",
                 path: "/plants-species",
                 icon: <LocalFloristIcon/>
-            }
-        ]
+            // }
+        // ]
     },
     {
         title: "Events",

@@ -1,8 +1,8 @@
 import {plantRepository} from "../repositories/plantRepository";
 
 class PlantService {
-    getPlants = () => {
-        return plantRepository.getPlants()
+    getPlants = (query) => {
+        return plantRepository.getPlants(query)
             .then((res) => {
                 return res;
             })

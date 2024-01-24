@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes, Switch, useNavigate} from "react-router-dom";
 import "./App.css";
 import AppContext from "./appContext";
 import Home from "./app/views/home/Home";
@@ -9,23 +9,24 @@ import Events from "./app/views/events/Events";
 import Taxes from "./app/views/taxes/Taxes";
 import Plants from "./app/views/plants/Plants";
 import PlantSpecies from "./app/views/plantSpecies/PlantSpecies";
+import PlantDetails from "./app/views/plantDetails/PlantDetails";
 import history from "./history";
-
 const App = () => {
     const [user, setUser] = useState({});
     return (
         <AppContext.Provider value={{user, setUser}}>
             <Router history={history}>
                 <div>
-                    <Routes>
-                        <Route exact path="/" element={<Home/>}/>
-                        <Route exact path="/season-preferences" element={<SeasonPreferences/>}/>
-                        <Route exact path="/map" element={<Map/>}/>
-                        <Route exact path="/events" element={<Events/>}/>
-                        <Route exact path="/taxes" element={<Taxes/>}/>
-                        <Route exact path="/plants" element={<Plants/>}/>
-                        <Route exact path="/plants-species" element={<PlantSpecies/>}/>
-                    </Routes>
+                    <Switch>
+                        <Route exact path="/" component={Home}/>
+                        <Route exact path="/season-preferences" component={SeasonPreferences}/>
+                        <Route exact path="/map" component={Map}/>
+                        <Route exact path="/events" component={Events}/>
+                        <Route exact path="/taxes" component={Taxes}/>
+                        <Route exact path="/plants" component={Plants}/>
+                        <Route exact path="/plants-species" component={PlantSpecies}/>
+                        <Route exact path="/plant-details" component={PlantDetails}/>
+                    </Switch>
                 </div>
             </Router>
         </AppContext.Provider>

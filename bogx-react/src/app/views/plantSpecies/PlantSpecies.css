@@ -17,17 +17,9 @@
     /*margin-top: 3%;*/
     font-style: oblique;
 }
-/*#plant-species-img {*/
-/*    height: 180px;*/
-/*    width: 45%;*/
-/*    border-radius: 10px;*/
-/*    margin-left: 27%;*/
-/*}*/
 
 .title-box-plant-species{
-    /*height: 20px;*/
     width: 45%;
-    /*border-radius: 5px;*/
     margin-left: 30%;
     background-image: url("plant-species.png");
     background-size: 90%;
@@ -35,7 +27,6 @@
     padding-top: 14%;
 }
 .box-plant-species {
-    /*height: 180px;*/
     height: fit-content;
     margin: 40px;
     width: 200px;
@@ -51,8 +42,6 @@
     box-shadow: 0 0 30px #131e13;
 }
 .plant-category-name{
-    /*width: fit-content;*/
-    /*height: 25px;*/
     background-color: white;
     border-radius: 6px;
     color: #4A614A;

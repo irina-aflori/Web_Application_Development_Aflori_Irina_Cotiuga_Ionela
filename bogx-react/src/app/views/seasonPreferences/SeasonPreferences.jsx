@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import {Button, Checkbox} from "@material-ui/core";
 import Sidebar from "../utils/Sidebar/Sidebar";
 import history from "../../../history";
+import {withRouter} from "react-router-dom";
 
 class SeasonPreferences extends Component {
     render() {
@@ -63,4 +64,4 @@ class SeasonPreferences extends Component {
 
 }
 
-export default SeasonPreferences;
+export default withRouter(SeasonPreferences);
