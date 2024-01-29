@@ -6,6 +6,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 import MoneyIcon from '@mui/icons-material/Money';
+import CommentIcon from '@mui/icons-material/Comment';
 
 export const SidebarData = [
     {
@@ -30,6 +31,11 @@ export const SidebarData = [
                 icon: <LocalFloristIcon/>
             // }
         // ]
+    },
+    {
+        title: "Comments & opinions",
+        path: "/comments-plants",
+        icon: <CommentIcon/>
     },
     {
         title: "Events",

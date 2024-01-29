@@ -10,6 +10,7 @@ import Taxes from "./app/views/taxes/Taxes";
 import Plants from "./app/views/plants/Plants";
 import PlantSpecies from "./app/views/plantSpecies/PlantSpecies";
 import PlantDetails from "./app/views/plantDetails/PlantDetails";
+import PlantComments from "./app/views/plantComments/PlantComments";
 import history from "./history";
 const App = () => {
     const [user, setUser] = useState({});
@@ -26,6 +27,7 @@ const App = () => {
                         <Route exact path="/plants" component={Plants}/>
                         <Route exact path="/plants-species" component={PlantSpecies}/>
                         <Route exact path="/plant-details" component={PlantDetails}/>
+                        <Route exact path="/comments-plants" component={PlantComments}/>
                     </Switch>
                 </div>
             </Router>

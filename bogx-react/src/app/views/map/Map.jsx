@@ -4,6 +4,7 @@ import Sidebar from "../utils/Sidebar/Sidebar";
 import {withRouter} from "react-router-dom";
 import {Button, IconButton} from "@material-ui/core";
 import DirectionsIcon from '@mui/icons-material/Directions';
+import sparqlService from "../../shared/services/sparqlService";
 
 const ZOOM_LEVEL = 14.8;
 
@@ -16,16 +17,26 @@ class Map extends Component {
                 longitude: 27.5513
             },
             map: null,
-            displayText: false
+            displayText: false,
+            markers: []
         };
         this.mapRef = React.createRef(); // Create a ref for the map container
         this.displayLocation = this.displayLocation.bind(this);
         this.showMap = this.showMap.bind(this);
-        // this.displayRoute = this.displayRoute.bind(this);
+    }
+    componentDidMount() {
+        sparqlService.getMarkersFromSparqlQuery().then((markersList) => {
+            this.setState({
+                ...this.state,
+                markers: markersList
+            });
+            this.initializeMap(markersList);
+        }).catch((err) => {
+            console.log(err)
+        });
     }
 
     displayLocation(position) {
-        console.log("displayLocation: ", position);
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         this.setState({latitude, longitude});
@@ -33,8 +44,7 @@ class Map extends Component {
         this.showMap(position.coords);
     }
 
-    showMap(coords) {
-        console.log("showMap: ", coords);
+    showMap(coords, markersList) {
         const googleLatLong = new window.google.maps.LatLng(coords.latitude, coords.longitude);
 
         const mapOptions = {
@@ -61,47 +71,72 @@ class Map extends Component {
 
             map.panTo(event.latLng);
         });
+        this.displayMarkers(map, markersList);
     }
 
-    initializeMap = () => {
+    initializeMap = (markersList) => {
         const {latitude, longitude} = this.state.coordinates;
         const coords = {latitude, longitude};
 
-        this.showMap(coords);
+        this.showMap(coords, markersList);
     }
-    displayRoute = (startPosition, endPosition) => {
+    displayRoute = (startPosition, endPosition, isDisplayed) => {
         const directionsService = new window.google.maps.DirectionsService();
         const directionsRenderer = new window.google.maps.DirectionsRenderer();
-        directionsRenderer.setMap(this.state.map);
-
-        const request = {
-            origin: startPosition,
-            destination: endPosition,
-            travelMode: 'WALKING'
-        };
-
-        directionsService.route(request, (result, status) => {
-            if (status === 'OK') {
-                directionsRenderer.setDirections(result);
-            } else {
-                console.error(`Directions request failed due to ${status}`);
-            }
-        });
+        if (isDisplayed === true) {
+            directionsRenderer.setMap(this.state.map);
+            const request = {
+                origin: startPosition,
+                destination: endPosition,
+                travelMode: 'WALKING'
+            };
+            directionsService.route(request, (result, status) => {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(result);
+                } else {
+                    console.error(`Directions request failed due to ${status}`);
+                }
+            });
+        }
+        else
+            this.initializeMap(this.state.markers);
     }
+    displayMarkers(map, loadedMarkers) {
+        let created_markers = [];
+        var latlngbounds = new window.google.maps.LatLngBounds();
 
-    componentDidMount() {
-        this.initializeMap();
-        // const entranceCoords = { lat: this.state.coordinates.latitude, lng: this.state.coordinates.longitude }; // Replace with actual entrance coordinates
-        // const plantCoords = { lat: 47.1720, lng: 27.5840 }; // Replace with your chosen plant's coordinates
-        //
-        // this.displayRoute(entranceCoords, plantCoords);
-        // this.displayRoute("iasi", "vaslui");
+        loadedMarkers.forEach(dataMarker => {
+            var myLatlng = new window.google.maps.LatLng(
+                dataMarker.latitudeMarker,
+                dataMarker.longitudeMarker
+            );
+            var marker = new window.google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                // code: data.code,
+            });
+            const icon = {
+                url: dataMarker.imageMarker, // url
+                scaledSize: new window.google.maps.Size(21,21), // scaled size
+                origin: new window.google.maps.Point(0, 0), // origin
+                anchor: new window.google.maps.Point(0, 0), // anchor
+            };
+            marker.setIcon(icon);
+            created_markers = [ ...created_markers, marker]
+            latlngbounds.extend(myLatlng);
+            marker.addListener("click",  () => {
+                this.handleMarkerClick(dataMarker.latitudeMarker, dataMarker.longitudeMarker)
 
-        // if (navigator.geolocation) {
-        //     navigator.geolocation.getCurrentPosition(this.displayLocation);
-        // } else {
-        //     alert("Sorry, this browser doesn't support geolocation!");
-        // }
+            });
+        });
+        if (loadedMarkers.length > 0) {
+            map.fitBounds(latlngbounds);
+        }
+    }
+    handleMarkerClick (latitude, longitude) {
+        if (this.state.displayText)
+            this.displayRoute( {lat: 47.1867, lng: 27.55745}, {lat: latitude, lng: longitude}, true)
+
     }
 
     render() {
@@ -113,10 +148,6 @@ class Map extends Component {
                     <div style={{display: "flex"}}>
                     <p id="location"> Geographic coordinates: {latitude}, {longitude}</p>
                     <Button className="button-display-route" style={{backgroundColor: "#4A614A", width: "fit-content", height: "40px", color: "#e0e4da", marginTop: "5%", marginLeft: "5%", fontSize: "smaller"}}
-                        //     onClick={ () => {    const entranceCoords = { lat: 47.1867, lng: 27.55745 }; // Replace with actual entrance coordinates
-                        // const plantCoords = { lat: 47.1854, lng: 27.5504 };
-                        //
-                        // this.displayRoute(entranceCoords, plantCoords)}}
                         onClick={ () => this.setState({displayText: !this.state.displayText})}
                     >
                         Show Route
@@ -125,17 +156,21 @@ class Map extends Component {
                         </IconButton>
                     </Button>
                         {this.state.displayText && (
-                            <p style={{marginTop: "5%", marginLeft: "2%", color: "#4A614A", marginRight: "7%"}}>Select the marker - plant you want to see</p>
+                            <p style={{marginTop: "5%", marginLeft: "2%", color: "#4A614A", marginRight: "7%", fontSize: "large"}}>Select a marker</p>
                         )}
+                        {this.state.displayText && <Button className="button-display-route" style={{backgroundColor: "#4A614A", width: "fit-content", height: "40px", color: "#e0e4da", marginTop: "5%", marginLeft: "5%", fontSize: "smaller"}}
+                                onClick={ () => {this.displayRoute(null, null, false); this.setState({displayText: !this.state.displayText})}}
+                        >
+                            Clear Route
+                            <IconButton>
+                                <DirectionsIcon/>
+                            </IconButton>
+                        </Button>}
                     </div>
                     <div ref={this.mapRef} id="map" style={{height: '380px', width: '84%'}}>
                         Loading...
                     </div>
                 </div>
-                {/*<div style={{backgroundColor: "black", width: "100px", height: "100px"}} onClick={ () => {    const entranceCoords = { lat: 47.1867, lng: 27.55745 }; // Replace with actual entrance coordinates*/}
-                {/*    const plantCoords = { lat: 47.1854, lng: 27.5504 };*/}
-
-                {/*    this.displayRoute(entranceCoords, plantCoords)}}> </div>*/}
             </div>
         )
     }

@@ -36,7 +36,9 @@
     padding-bottom: 10px;
     display: grid;
     justify-content: center;
-    padding-left: 15px;
+    padding-left: 10px;
+    border-radius: 10px;
+    min-height: 230px;
 }
 .box-plant-species:hover{
     box-shadow: 0 0 30px #131e13;
@@ -52,6 +54,7 @@
     padding: 5px;
     margin-right: 7%;
     text-align: center;
+    min-width: 170px;
 }
 #plant-type-img{
     height: 160px;

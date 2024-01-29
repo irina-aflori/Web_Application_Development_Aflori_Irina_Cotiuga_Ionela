@@ -4,6 +4,8 @@ public class Plant {
     private String plantName;
     private String plantDescription;
     private String plantImageURL;
+    private Double latitudeMarker;
+    private Double longitudeMarker;
 
     public Plant() {};
     public Plant(String plantName, String plantDescription, String plantImageURL) {
@@ -34,5 +36,21 @@ public class Plant {
 
     public void setPlantImageURL(String plantImageURL) {
         this.plantImageURL = plantImageURL;
+    }
+
+    public Double getLatitudeMarker() {
+        return latitudeMarker;
+    }
+
+    public void setLatitudeMarker(Double latitudeMarker) {
+        this.latitudeMarker = latitudeMarker;
+    }
+
+    public Double getLongitudeMarker() {
+        return longitudeMarker;
+    }
+
+    public void setLongitudeMarker(Double longitudeMarker) {
+        this.longitudeMarker = longitudeMarker;
     }
 }

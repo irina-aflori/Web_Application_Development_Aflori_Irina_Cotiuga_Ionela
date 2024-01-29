@@ -7,15 +7,17 @@ import {Button} from "@material-ui/core";
 import {withRouter} from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Nav from "react-bootstrap/Nav";
+import sparqlService from "../../shared/services/sparqlService";
 
 class Plants extends Component {
     state = {
         plantsList: [],
-        plantSpeciesImg: this.props.location.state.plantSpeciesImage
+        plantSpeciesImg: this.props.location.state.plantSpeciesImage,
+        plantSpeciesName: this.props.location.state.plantSpeciesName
     };
 
     componentDidMount() {
-        plantService.getPlants({plantSpecies: this.props.location.state.plantSpeciesName}).then((plantsList) => {
+        sparqlService.getPlantsFromSpeciesFromSparqlQuery({plantSpecies: this.props.location.state.plantSpeciesName}).then((plantsList) => {
             this.setState({
                 ...this.state,
                 plantsList: plantsList
@@ -40,11 +42,10 @@ class Plants extends Component {
                         <ArrowBackIcon style={{width: "40px", height: "40px"}}/>
                     </div>
                     <div
-                        // className="title-box-plant-species"
                         className="title-box-plants" style={{
                         backgroundImage: `url(${this.state.plantSpeciesImg})`,
-                        backgroundSize: "85% 105%",
-                        marginLeft: "26%"
+                        backgroundSize: "70% 130% ",
+                        marginLeft: "30%"
                     }}
                     >
                     </div>
@@ -53,11 +54,11 @@ class Plants extends Component {
                 <Grid container>
                     {this.state.plantsList && this.state.plantsList
                         .map((plant, index) => (
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <div className="box-plants" onClick={() => {
                                     this.props.history.push({
                                         pathname: '/plant-details',
-                                        state: {plant: plant, plantSpecies: this.props.location.state.plantSpeciesName}
+                                        state: {plantName: plant.plantName, plantSpeciesName: this.state.plantSpeciesName}
                                     })
                                 }}>
                                     <img src={plant.plantImageURL} alt="plant-name-img" id="plant-name-img"/>

@@ -13,7 +13,9 @@
     padding-bottom: 10px;
     display: grid;
     justify-content: center;
-    padding-left: 15px;
+    padding-left: 10px;
+    border-radius: 10px;
+    min-height: 230px;
 }
 .box-plants:hover{
     box-shadow: 0 0 30px #131e13;
@@ -29,10 +31,10 @@
     background-color: white;
     border-radius: 10px;
     color: #4A614A;
-    width: fit-content;
+    width: 30%;
     height: fit-content;
     font-size: large;
-    margin-left: 38%;
+    margin-left: 35.5%;
     padding: 10px;
     text-align: center;
     font-weight: bold;
@@ -56,4 +58,5 @@
     padding: 5px;
     margin-right: 7%;
     text-align: center;
+    min-width: 170px;
 }

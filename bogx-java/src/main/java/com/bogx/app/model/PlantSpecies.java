@@ -4,6 +4,8 @@ public class PlantSpecies {
     private String plantSpeciesName;
     private String plantSpeciesImageURL;
 
+    public PlantSpecies() {};
+
     public PlantSpecies(String plantSpeciesName, String plantSpeciesImageURL) {
         this.plantSpeciesName = plantSpeciesName;
         this.plantSpeciesImageURL = plantSpeciesImageURL;

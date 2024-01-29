@@ -1,0 +1,36 @@
+.comments-plant{
+    background-color: #e0e4da;
+    min-height: 54vw;
+}
+.comments-title{
+    color: #4A614A;
+    text-align: center;
+    margin-top: 3%;
+    font-style: oblique;
+    margin-bottom: 3%;
+}
+.comment-box{
+    background-color: #4A614A;
+    border-radius: 10px;
+    min-height: 190px;
+    margin-bottom: 25px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+    padding-top: 15px;
+}
+#date-plant-comment, #plant-comment{
+    color: #E0E4DA;
+}
+#date-plant-comment {
+    font-style: oblique;
+    margin-bottom: 2%;
+}
+#plant-comment-img{
+    margin-top: 2%;
+    width: 30%;
+    height: 30%;
+    margin-bottom: 2%;
+    border-radius: 10px;
+}
