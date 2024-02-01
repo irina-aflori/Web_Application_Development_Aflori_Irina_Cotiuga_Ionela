@@ -38,7 +38,7 @@
     margin: 2% 3% 1%;
 }
 
-.event-hour, .event-date {
+.event-hour, .event-date, .event-day {
     color: #E0E4DA;
     font-weight: bold;
     font-size: x-large;
@@ -78,4 +78,10 @@
     text-align: center;
     margin: 3%;
     color: #4A614A;
+}
+.event-view-joined{
+    float: left;
+    color: #E0E4DA;
+    margin-left: 4%;
+    margin-top: 2%;
 }

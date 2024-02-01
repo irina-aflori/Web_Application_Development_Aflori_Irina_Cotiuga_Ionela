@@ -4,7 +4,7 @@ import Sidebar from "../utils/Sidebar/Sidebar";
 import {withRouter} from "react-router-dom";
 import {Button, IconButton} from "@material-ui/core";
 import DirectionsIcon from '@mui/icons-material/Directions';
-import sparqlService from "../../shared/services/sparqlService";
+import markerService from "../../shared/services/markerService";
 
 const ZOOM_LEVEL = 14.8;
 
@@ -25,7 +25,7 @@ class Map extends Component {
         this.showMap = this.showMap.bind(this);
     }
     componentDidMount() {
-        sparqlService.getMarkersFromSparqlQuery().then((markersList) => {
+        markerService.getMarkersFromSparqlQuery().then((markersList) => {
             this.setState({
                 ...this.state,
                 markers: markersList
@@ -117,7 +117,7 @@ class Map extends Component {
             });
             const icon = {
                 url: dataMarker.imageMarker, // url
-                scaledSize: new window.google.maps.Size(21,21), // scaled size
+                scaledSize: new window.google.maps.Size(24,24), // scaled size
                 origin: new window.google.maps.Point(0, 0), // origin
                 anchor: new window.google.maps.Point(0, 0), // anchor
             };

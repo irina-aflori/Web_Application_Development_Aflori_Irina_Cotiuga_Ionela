@@ -1,23 +1,33 @@
-//package com.bogx.app.controller;
-//
-//import com.bogx.app.model.Plant;
-//import com.bogx.app.service.PlantService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.MediaType;
-//import org.springframework.web.bind.annotation.*;
-//
-//import java.util.List;
-//import java.util.Map;
-//
-//@RestController
-//@RequestMapping(value = "/api/plants")
-//public class PlantController {
-//    @Autowired
-//    private PlantService plantService;
-//
-//    @RequestMapping(method = RequestMethod.GET,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    protected List<Plant> getAllPlants(@RequestParam String plantSpecies) {
-//        return plantService.getPlantsData(plantSpecies);
-//    }
-//}
+package com.bogx.app.controller;
+
+import com.bogx.app.model.Plant;
+import com.bogx.app.model.PlantSpecies;
+import com.bogx.app.service.PlantService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(value = "/api/plantSpecies")
+public class PlantController {
+    @Autowired
+    private PlantService plantService;
+
+    @GetMapping()
+    public List<PlantSpecies> getAllPlantSpecies() {
+        return plantService.getPlantSpeciesFromSparqlQuery();
+    }
+    @GetMapping("/plants")
+    public List<Plant> getAllPlantsFromSpecies(@RequestParam String plantSpecies) {
+        return plantService.getPlantsFromSpeciesFromSparqlQuery(plantSpecies);
+    }
+    @GetMapping("/plants/plantDetails")
+    public Plant getPlantDetailsFromSpecies(@RequestParam String plantName, @RequestParam String plantSpecies) {
+        return plantService.getPlantDetailsFromSparqlQuery(plantName, plantSpecies);
+    }
+    @GetMapping("/seasonsRecommendations")
+    public List<PlantSpecies> getPlantSpeciesFromSeasonRecommendations(@RequestParam List<String> seasons) {
+        return plantService.getPlantSpeciesFromSeasonRecommendations(seasons);
+    }
+}

@@ -3,14 +3,14 @@ import "./Taxes.css";
 import Sidebar from "../utils/Sidebar/Sidebar";
 import {withRouter} from "react-router-dom";
 import {Card, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
-import sparqlService from "../../shared/services/sparqlService";
+import taxService from "../../shared/services/taxService";
 
 class Taxes extends Component {
     state = {
         taxesList: []
     };
     componentDidMount() {
-        sparqlService.getTaxesFromSparqlQuery().then((taxesList) => {
+        taxService.getTaxesFromSparqlQuery().then((taxesList) => {
             this.setState({
                 ...this.state,
                 taxesList: taxesList

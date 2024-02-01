@@ -4,14 +4,18 @@ public class Plant {
     private String plantName;
     private String plantDescription;
     private String plantImageURL;
+    private String plantDiseases;
+    private String plantMaintenance;
     private Double latitudeMarker;
     private Double longitudeMarker;
 
     public Plant() {};
-    public Plant(String plantName, String plantDescription, String plantImageURL) {
+    public Plant(String plantName, String plantDescription, String plantImageURL, String plantDiseases, String plantMaintenance) {
         this.plantName = plantName;
         this.plantDescription = plantDescription;
         this.plantImageURL = plantImageURL;
+        this.plantDiseases = plantDiseases;
+        this.plantMaintenance = plantMaintenance;
     }
 
     public String getPlantName() {
@@ -36,6 +40,22 @@ public class Plant {
 
     public void setPlantImageURL(String plantImageURL) {
         this.plantImageURL = plantImageURL;
+    }
+
+    public String getPlantDiseases() {
+        return plantDiseases;
+    }
+
+    public void setPlantDiseases(String plantDiseases) {
+        this.plantDiseases = plantDiseases;
+    }
+
+    public String getPlantMaintenance() {
+        return plantMaintenance;
+    }
+
+    public void setPlantMaintenance(String plantMaintenance) {
+        this.plantMaintenance = plantMaintenance;
     }
 
     public Double getLatitudeMarker() {

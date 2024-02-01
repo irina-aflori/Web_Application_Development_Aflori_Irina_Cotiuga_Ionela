@@ -18,7 +18,7 @@ export class FetchAdapter {
                     return Promise.reject(res);
                 }
                 else {
-                    return res.json();
+                    return res.text();
                 }
             })
             .then((data) => {

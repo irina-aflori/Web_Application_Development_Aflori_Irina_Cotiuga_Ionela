@@ -2,23 +2,26 @@ import React, {Component} from "react";
 import "./PlantSpecies.css";
 import Sidebar from "../utils/Sidebar/Sidebar";
 import Grid from "@material-ui/core/Grid";
-import plantSpeciesService from "../../shared/services/plantSpeciesService";
 import { withRouter } from 'react-router-dom';
-import sparqlService from "../../shared/services/sparqlService";
+import plantService from "../../shared/services/plantService";
 
 class PlantSpecies extends Component {
     state = {
         plantSpeciesList: []
     };
     componentDidMount() {
-                sparqlService.getPlantSpeciesFromSparqlQuery().then((plantSpeciesList) => {
-                    this.setState({
-                        ...this.state,
-                        plantSpeciesList: plantSpeciesList
-                    });
-                }).catch((err) => {
-                    console.log(err)
-                });
+
+        let query;
+        if (this.props.location.state && this.props.location.state.seasons) query = this.props.location.state.seasons
+        else query = ['Spring', 'Summer', 'Autumn', 'Winter']
+        plantService.getPlantSpeciesFromSeasonRecommendations({seasons: query}).then((plantSpeciesList) => {
+            this.setState({
+                ...this.state,
+                plantSpeciesList: plantSpeciesList
+            });
+        }).catch((err) => {
+            console.log(err)
+        });
     }
     render() {
         return (

@@ -7,7 +7,6 @@ import {Button} from "@material-ui/core";
 import {withRouter} from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Nav from "react-bootstrap/Nav";
-import sparqlService from "../../shared/services/sparqlService";
 
 class Plants extends Component {
     state = {
@@ -17,7 +16,7 @@ class Plants extends Component {
     };
 
     componentDidMount() {
-        sparqlService.getPlantsFromSpeciesFromSparqlQuery({plantSpecies: this.props.location.state.plantSpeciesName}).then((plantsList) => {
+        plantService.getPlantsFromSpeciesFromSparqlQuery({plantSpecies: this.props.location.state.plantSpeciesName}).then((plantsList) => {
             this.setState({
                 ...this.state,
                 plantsList: plantsList
