@@ -67,9 +67,10 @@ public class PlantService {
         String encodedPlantName = plantName.replace(" ", "_");
         String queryString = "PREFIX onto: <http://www.semanticweb.org/irina/ontologies/2024/0/bogx#>"
                 + "PREFIX dbr: <http://dbpedia.org/resource/>"
-                + "SELECT ?plantDescription ?plantImageURL ?plantDiseases ?plantMaintenance ?latitudeMarker ?longitudeMarker "
+                + "SELECT ?plantId ?plantDescription ?plantImageURL ?plantDiseases ?plantMaintenance ?latitudeMarker ?longitudeMarker "
                 + "WHERE { "
                 + " onto:" + encodedPlantName + " a onto:Plant ;"
+                + "         onto:plantId ?plantId ;"
                 + "         onto:plantDescription ?plantDescription ;"
                 + "         onto:plantImageURL ?plantImageURL ;"
                 + "         onto:plantDiseases ?plantDiseases ;"
@@ -88,6 +89,7 @@ public class PlantService {
             while (results.hasNext()) {
                 QuerySolution solution = results.nextSolution();
                 plant.setPlantName(plantName);
+                plant.setPlantId(solution.getLiteral("plantId").getString());
                 plant.setPlantDescription(solution.getLiteral("plantDescription").getString());
                 plant.setPlantImageURL(solution.getLiteral("plantImageURL").getString());
                 plant.setPlantDiseases(solution.getLiteral("plantDiseases").getString());

@@ -2,6 +2,7 @@ package com.bogx.app.model;
 
 public class Plant {
     private String plantName;
+    private String plantId;
     private String plantDescription;
     private String plantImageURL;
     private String plantDiseases;
@@ -72,5 +73,13 @@ public class Plant {
 
     public void setLongitudeMarker(Double longitudeMarker) {
         this.longitudeMarker = longitudeMarker;
+    }
+
+    public String getPlantId() {
+        return plantId;
+    }
+
+    public void setPlantId(String plantId) {
+        this.plantId = plantId;
     }
 }

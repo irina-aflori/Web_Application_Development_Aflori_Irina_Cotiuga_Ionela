@@ -41,7 +41,20 @@ class PlantDetails extends Component {
     handleChangeImagePlant = event => {
         this.setState({
             ...this.state,
-            imagePlant: URL.createObjectURL(event.target.files[0])
+            imagePlant: event.target.files[0]
+        });
+    };
+    handleSubmitComment = (plantId, commentPlant, imagePlant) => {
+        console.log("imagePlant:", imagePlant);
+        console.log("imageId:", plantId);
+
+        plantService.addCommentToPlant(plantId, {comment: commentPlant, image: imagePlant}).then(() => {
+            this.setState({
+                ...this.state,
+                displayAddCommentModal: false
+            });
+        }).catch((err) => {
+            console.log(err);
         });
     };
     render() {
@@ -135,7 +148,7 @@ class PlantDetails extends Component {
                         <div className="p-16">
                             <ValidatorForm
                                 ref="form"
-                                // onSubmit={() => this.handleSubmitComment(this.state.plantDetails.plantId, this.state.commentPlant, this.state.imagePlant)}
+                                onSubmit={() => this.handleSubmitComment(this.state.plantDetails.plantId, this.state.commentPlant, this.state.imagePlant.name)}
                             >
                                 <Grid item lg={5} md={5} sm={5} xs={5} style={{marginLeft: "15%"}}>
                                     <TextValidator

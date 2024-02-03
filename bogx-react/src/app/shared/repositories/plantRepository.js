@@ -48,5 +48,21 @@ export class plantRepository {
                 }
             });
     }
+    static getCommentToPlant(query = {}) {
+        return FetchAdapter.request(
+            `${APP_CONFIG.URL.app}/feedback/feedbackPlant${helperService.serialize(query)}`,
+            {
+                headers: {
+                    'Accept': 'application/sparql-results+json'
+                }
+            });
+    }
+    static addCommentToPlant(plantId, query = {}) {
+        return FetchAdapter.request(
+            `${APP_CONFIG.URL.app}/feedback/${plantId}/feedbackPlant${helperService.serialize(query)}`,
+            {
+                method: 'PUT',
+            });            
+    }
 }
 

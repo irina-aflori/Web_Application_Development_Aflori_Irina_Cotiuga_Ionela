@@ -37,6 +37,24 @@ class PlantService {
                 return Promise.reject(err);
             });
     };
+    getPlantsComments = (query) => {
+        return plantRepository.getCommentToPlant(query)
+            .then((res) => {
+                return res;
+            })
+            .catch((err) => {
+                return Promise.reject(err);
+            });
+    };
+    addCommentToPlant = (plantId, query) => {
+        return plantRepository.addCommentToPlant(plantId, query)
+            .then((res) => {
+                return res;
+            })
+            .catch((err) => {
+                return Promise.reject(err);
+            });
+    };
 }
 
 export default new PlantService();
