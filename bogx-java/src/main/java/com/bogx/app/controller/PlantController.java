@@ -22,9 +22,9 @@ public class PlantController {
     public List<Plant> getAllPlantsFromSpecies(@RequestParam String plantSpecies) {
         return plantService.getPlantsFromSpeciesFromSparqlQuery(plantSpecies);
     }
-    @GetMapping("/plants/plantDetails")
-    public Plant getPlantDetailsFromSpecies(@RequestParam String plantName, @RequestParam String plantSpecies) {
-        return plantService.getPlantDetailsFromSparqlQuery(plantName, plantSpecies);
+    @GetMapping("/plants/{plantId}")
+    public Plant getPlantDetailsFromSpecies(@PathVariable String plantId, @RequestParam String plantName, @RequestParam String plantSpecies) {
+        return plantService.getPlantDetailsFromSparqlQuery(plantId, plantName, plantSpecies);
     }
     @GetMapping("/seasonsRecommendations")
     public List<PlantSpecies> getPlantSpeciesFromSeasonRecommendations(@RequestParam List<String> seasons) {

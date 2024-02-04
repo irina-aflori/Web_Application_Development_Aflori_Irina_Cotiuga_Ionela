@@ -21,7 +21,24 @@ export class eventRepository {
     }
     static getJoinedEventPersonsFromSparqlQuery(eventId) {
         return FetchAdapter.request(
-            `${APP_CONFIG.URL.app}/events/${eventId}`,
+            `${APP_CONFIG.URL.app}/events/${eventId}/join`,
+            {
+                headers: {
+                    'Accept': 'application/sparql-results+json'
+                }
+            });
+    }
+    static addFeedbackToEvent(eventId, feedback) {
+        return FetchAdapter.request(
+            `${APP_CONFIG.URL.app}/events/${eventId}/feedback`,
+            {
+                method: 'POST',
+                body: JSON.stringify(feedback)
+            });
+    }
+    static getFeedbacksFromEvent(eventId) {
+        return FetchAdapter.request(
+            `${APP_CONFIG.URL.app}/events/${eventId}/feedback`,
             {
                 headers: {
                     'Accept': 'application/sparql-results+json'

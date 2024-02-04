@@ -23,7 +23,8 @@ class PlantDetails extends Component {
         imagePlant: null
     };
     componentDidMount() {
-        plantService.getPlantDetailsFromSparqlQuery({plantName: this.props.location.state.plantName, plantSpecies: this.props.location.state.plantSpeciesName}).then((plantDetails) => {
+        const plantId = this.props.location.state.plantId;
+        plantService.getPlantDetailsFromSparqlQuery(plantId, {plantName: this.props.location.state.plantName, plantSpecies: this.props.location.state.plantSpeciesName}).then((plantDetails) => {
             this.setState({
                 ...this.state,
                 plantDetails: plantDetails

@@ -28,5 +28,23 @@ class EventService {
                 return Promise.reject(err);
             });
     };
+    addFeedbackToEvent = (eventId, feedback) => {
+        return eventRepository.addFeedbackToEvent(eventId, feedback)
+            .then((res) => {
+                return res;
+            })
+            .catch((err) => {
+                return Promise.reject(err);
+            });
+    };
+    getFeedbacksFromEvent = (eventId) => {
+        return eventRepository.getFeedbacksFromEvent(eventId)
+            .then((res) => {
+                return res;
+            })
+            .catch((err) => {
+                return Promise.reject(err);
+            });
+    };
 }
 export default new EventService();

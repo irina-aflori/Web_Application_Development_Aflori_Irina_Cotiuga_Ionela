@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +20,14 @@ import java.util.List;
 public class FeedbackPlantService {
     public List<Feedback> getFeedbackFromSparqlQuery(){
         String queryString = "PREFIX onto: <http://www.semanticweb.org/irina/ontologies/2024/0/bogx#>\n" +
-                "SELECT ?feedback ?feedbackComment ?feedbackImage ?feedbackDate\n" +
+                "SELECT ?feedback ?feedbackComment ?feedbackImage ?feedbackDate ?plantName\n" +
                 "WHERE {\n" +
                 "  ?feedback a onto:PlantFeedback ;\n" +
                 "              onto:feedbackComment ?feedbackComment ;\n" +
                 "              onto:feedbackImage ?feedbackImage ;\n" +
                 "              onto:feedbackDate ?feedbackDate .\n" +
+                "   ?plant onto:hasPlantFeedback ?feedback .\n" +
+                "   ?plant onto:plantName ?plantName ." +
                 "}";
 
         Query query = QueryFactory.create(queryString);
@@ -39,12 +42,12 @@ public class FeedbackPlantService {
                 feedback.setFeedbackImage(solution.getLiteral("feedbackImage").getString());
 
                 String feedbackDateString = solution.getLiteral("feedbackDate").getString();
-                DateTimeFormatter originalFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                DateTimeFormatter originalFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
                 LocalDate date = LocalDate.parse(feedbackDateString, originalFormatter);
                 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 String formattedDate = date.format(dateFormatter);
                 feedback.setFeedbackDate(formattedDate);
-
+                feedback.setFeedbackPlantName(solution.getLiteral("plantName").getString());
                 feecbacks.add(feedback);
             }
             return feecbacks;
@@ -65,9 +68,10 @@ public class FeedbackPlantService {
     }
 
     public String buildInsertQuery(String plantId, String comment, String imageUrl) {
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String currentDateString = currentDate.format(formatter);
+
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        String currentDateString = now.format(formatter);
 
         Feedback feedback = new Feedback();
         feedback.setFeedbackImage(imageUrl);

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {BrowserRouter as Router, Route, Routes, Switch, useNavigate} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import "./App.css";
 import AppContext from "./appContext";
 import Home from "./app/views/home/Home";

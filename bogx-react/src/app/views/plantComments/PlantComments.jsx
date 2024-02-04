@@ -27,8 +27,9 @@ class PlantComments extends Component {
                 <h1 className="comments-title">Other opinions about plants</h1>
                 {this.state.plantComments && this.state.plantComments
                     .map((plantComments) => (
-                        <Grid item>
+                        <Grid item style={{paddingBottom: "3%"}}>
                             <div className="comment-box">
+                                <p id="name-plant-comment">{plantComments.feedbackPlantName}</p>
                                 <p id="date-plant-comment">{plantComments.feedbackDate}</p>
                                 <p id="plant-comment">{plantComments.feedbackComment}</p>
                                 <img src={plantComments.feedbackImage} alt="plant-comment-img" id="plant-comment-img"/>

@@ -18,6 +18,8 @@
     border-radius: 10px;
     min-height: 190px;
     margin-bottom: 4%;
+    height: fit-content;
+    padding: 15px;
 }
 .event-title {
     color: #E0E4DA;
@@ -65,13 +67,13 @@
     color: #E0E4DA;
     width: 50px;
     height: 40px;
-    margin-left: 44%;
+    margin-left: 40%;
     margin-top: 10px;
 }
 #submit-feedback-event{
     background-color: #783D19;
     color: #E0E4DA;
-    margin-left: 30%;
+    margin-left: 25%;
     margin-top: 5px;
 }
 .modal-join-title, .modal-description{
@@ -84,4 +86,23 @@
     color: #E0E4DA;
     margin-left: 4%;
     margin-top: 2%;
+}
+.feedback-box{
+    background-color: #4A614A;
+    border-radius: 10px;
+    min-height: 60px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+    padding-top: 6px;
+    padding-bottom: 15px;
+}
+#name-feedback-comment, #feedback-comment{
+    color: #E0E4DA;
+    margin-top: 2%;
+}
+#name-feedback-comment{
+    font-style: oblique;
+    font-size: large;
 }

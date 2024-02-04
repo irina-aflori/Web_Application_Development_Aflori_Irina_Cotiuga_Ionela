@@ -5,6 +5,7 @@ public class Feedback {
     private String feedbackComment;
     private String feedbackImage;
     private String feedbackDate;
+    private String feedbackPlantName;
     public Feedback(){};
 
     public String getFeedbackName() {
@@ -37,5 +38,13 @@ public class Feedback {
 
     public void setFeedbackDate(String feedbackDate) {
         this.feedbackDate = feedbackDate;
+    }
+
+    public String getFeedbackPlantName() {
+        return feedbackPlantName;
+    }
+
+    public void setFeedbackPlantName(String feedbackPlantName) {
+        this.feedbackPlantName = feedbackPlantName;
     }
 }

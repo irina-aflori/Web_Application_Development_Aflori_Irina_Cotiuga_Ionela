@@ -9,6 +9,7 @@ import {TextValidator, ValidatorForm} from "react-material-ui-form-validator";
 import eventService from "../../shared/services/eventService";
 import Person from "../../shared/models/Person";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import Feedback from "../../shared/models/Feedback";
 
 class Events extends Component {
     state = {
@@ -21,7 +22,11 @@ class Events extends Component {
         futureEvents: [],
         pastEvents: [],
         joinedPersons: [],
-        openModalJoinedList: false
+        openModalJoinedList: false,
+        feedbacksEvent: [],
+        openModalFeedbackList: false,
+        currentEventId: '',
+        currentEvent: {}
     };
     componentDidMount() {
         eventService.getEventsFromSparqlQuery().then((events) => {
@@ -96,8 +101,27 @@ class Events extends Component {
         console.log(err)
     });
     }
-    handleSubmitFeedback () {
-
+    handleSubmitFeedback (eventId, comment, name) {
+        const feedback = new Feedback({feedbackName: name, feedbackComment: comment});
+        eventService.addFeedbackToEvent(eventId, feedback).then(() => {
+            this.setState({
+                ...this.state,
+                openModalFeedback: false
+            });
+            window.location.reload()
+        }).catch((err) => {
+            console.log(err)
+        });
+    }
+    handleViewFeedbackList(eventId) {
+        eventService.getFeedbacksFromEvent(eventId).then((feedbacks) => {
+            this.setState({
+                ...this.state,
+                feedbacksEvent: feedbacks
+            });
+        }).catch((err) => {
+            console.log(err)
+        });
     }
     render() {
         return (
@@ -119,10 +143,10 @@ class Events extends Component {
                                         <p className="event-title">{event.eventName}</p>
                                         <p className="event-description">{event.eventDescription}</p>
                                         <p className="event-joined">{event.eventParticipantCount + "/" + event.eventCapacity + " Joined"}</p>
-                                        <Button id="submit-join-event" variant="contained" onClick={() => this.setState({openModalJoin: true})}>
+                                        <Button id="submit-join-event" variant="contained" onClick={() => { this.setState({openModalJoin: true, currentEventId: event.eventId, currentEvent: event})}}>
                                             Join
                                         </Button>
-                                        <div className="event-view-joined" onClick={() => {this.setState({...this.state, openModalJoinedList: true}); this.handleViewJoinedList(event.eventId)}}> <Tooltip title="View Joined List"><VisibilityIcon/></Tooltip></div>
+                                        <div className="event-view-joined" onClick={() => {this.setState({...this.state, openModalJoinedList: true, currentEventId: event.eventId,  currentEvent: event}); this.handleViewJoinedList(event.eventId)}}> <Tooltip title="View Joined List"><VisibilityIcon/></Tooltip></div>
                                         <Modal
                                             open={this.state.openModalJoinedList}
                                             onClose={() => this.setState({openModalJoinedList: false})}
@@ -135,7 +159,7 @@ class Events extends Component {
                                                 backgroundColor: '#e0e4da', borderRadius: "8px", border: '2px solid #000',
                                                 overflowY: "auto", boxShadow: 24, p: 4}}>
                                                 <h4 className="modal-join-title">
-                                                    View persons who joined the event "{event.eventName}"
+                                                    View persons who joined the event {this.state.currentEvent.eventName}
                                                 </h4>
                                                 <div className="p-16">
                                                     <Card className="w-100 overflow-auto" elevation={3} style={{marginLeft: "8%", marginRight: "8%"}}>
@@ -170,7 +194,7 @@ class Events extends Component {
                                                         </Table>
                                                     </Card>
                                                 </div>
-                                                        <Button variant="contained" color="primary" style={{marginLeft: "40%", marginTop: "3%", marginBottom: "3%"}}
+                                                        <Button variant="contained" style={{backgroundColor: "#783D19", color: "#E0E4DA", marginLeft: "42%", marginTop: "3%", marginBottom: "3%"}}
                                                                 onClick={() => {this.setState({...this.state, openModalJoinedList: false})}}>
                                                             Close
                                                         </Button>
@@ -190,12 +214,12 @@ class Events extends Component {
                                                     Join our scheduled event
                                                 </h2>
                                                 <h4 className="modal-description">
-                                                    {event.eventName}
+                                                    {this.state.currentEvent.eventName}
                                                 </h4>
                                                 <div className="p-16">
                                                     <ValidatorForm
                                                         ref="form"
-                                                        onSubmit={() => this.handleSubmitJoin(event.eventId, this.state.lastName, this.state.firstName)}
+                                                        onSubmit={() => this.handleSubmitJoin(this.state.currentEventId, this.state.lastName, this.state.firstName)}
                                                     >
                                                         <Grid item lg={5} md={5} sm={5} xs={5} style={{marginLeft: "30%"}}>
                                                             <TextValidator
@@ -253,9 +277,41 @@ class Events extends Component {
                                     <div className="event-box">
                                         <p className="event-title">{event.eventName}</p>
                                         <p className="event-description">{event.eventDescription}</p>
-                                        <Button id="submit-feedback-event" variant="contained" onClick={() => this.setState({openModalFeedback: true})}>
+                                        <Button id="submit-feedback-event" variant="contained" onClick={() => this.setState({openModalFeedback: true, currentEventId: event.eventId, currentEvent: event})}>
                                             Tell us about your experience
                                         </Button>
+                                        <div className="event-view-joined" onClick={() => {this.setState({...this.state, openModalFeedbackList: true, currentEventId: event.eventId, currentEvent: event}); this.handleViewFeedbackList(event.eventId)}}> <Tooltip title="View Event Feedback"><VisibilityIcon/></Tooltip></div>
+                                        <Modal
+                                            open={this.state.openModalFeedbackList}
+                                            onClose={() => this.setState({openModalFeedbackList: false})}
+                                            aria-labelledby="modal-modal-title"
+                                            aria-describedby="modal-modal-description"
+                                            className="modal-joined"
+                                        >
+                                            <Box style={{ position: 'absolute', top: '50%', left: '50%',
+                                                transform: 'translate(-50%, -50%)', width: 750, height: 500,
+                                                backgroundColor: '#e0e4da', borderRadius: "8px", border: '2px solid #000',
+                                                overflowY: "auto", boxShadow: 24, p: 4}}>
+                                                <h4 className="modal-join-title">
+                                                    View feedback of the event {this.state.currentEvent.eventName}
+                                                </h4>
+                                                <div className="p-16">
+                                                    {this.state.feedbacksEvent != null ? this.state.feedbacksEvent.map((feedback) => (
+                                                        <Grid item style={{padding: "15px"}}>
+                                                            <div className="feedback-box">
+                                                                <p id="name-feedback-comment">{feedback.feedbackName}</p>
+                                                                <p id="feedback-comment">{feedback.feedbackComment}</p>
+                                                            </div>
+                                                        </Grid>
+                                                        ))
+                                                        : <p> There is no feedback for this event </p>}
+                                                </div>
+                                                <Button variant="contained"  style={{backgroundColor: "#783D19", color: "#E0E4DA", marginLeft: "42%", marginTop: "3%", marginBottom: "3%"}}
+                                                        onClick={() => {this.setState({...this.state, openModalFeedbackList: false})}}>
+                                                    Close
+                                                </Button>
+                                            </Box>
+                                        </Modal>
                                         <Modal
                                             open={this.state.openModalFeedback}
                                             onClose={() => this.setState({openModalFeedback: false})}
@@ -270,14 +326,14 @@ class Events extends Component {
                                                     Tell us about your experience
                                                 </h2>
                                                 <h4 className="modal-description">
-                                                    {event.eventName}
+                                                    {this.state.currentEvent.eventName}
                                                 </h4>
                                                 <div className="p-16">
                                                     <ValidatorForm
                                                         ref="form"
-                                                        onSubmit={this.handleSubmitFeedback}
+                                                        onSubmit={() => this.handleSubmitFeedback(this.state.currentEventId, this.state.feedbackComment, this.state.name)}
                                                     >
-                                                        <Grid item lg={5} md={5} sm={5} xs={5} style={{marginLeft: "30%"}}>
+                                                        <Grid item lg={5} md={5} sm={5} xs={5} style={{marginLeft: "17%"}}>
                                                             <TextValidator
                                                                 variant = "outlined"
                                                                 className="mb-16 w-100"
@@ -285,13 +341,11 @@ class Events extends Component {
                                                                 type="text"
                                                                 onChange={this.handleChangeFeedback}
                                                                 name="feedback"
-                                                                fullWidth
                                                                 required
                                                                 multiline={true}
-                                                                rows={3}
-                                                                rowsMax={3}
-                                                                // value={lastName || ''}
-                                                                style={{marginBottom: "10%", marginTop:"5%"}}
+                                                                rows={4}
+                                                                rowsMax={4}
+                                                                style={{marginBottom: "10%", marginTop:"5%", width: "400px"}}
                                                             />
                                                             <TextValidator
                                                                 variant = "outlined"
@@ -302,8 +356,7 @@ class Events extends Component {
                                                                 onChange={this.handleChangeName}
                                                                 name="name"
                                                                 fullWidth
-                                                                // value={firstName|| ''}
-                                                                style={{marginBottom: "10%"}}
+                                                                style={{marginBottom: "10%", marginLeft: "30%"}}
                                                             />
                                                         </Grid>
                                                         <div className="flex flex-space-between flex-middle" style={{marginLeft: "34%"}}>

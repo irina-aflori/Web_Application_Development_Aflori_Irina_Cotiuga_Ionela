@@ -37,9 +37,10 @@ public class PlantService {
     public List<Plant> getPlantsFromSpeciesFromSparqlQuery(String plantSpecies) {
         String queryString = "PREFIX onto: <http://www.semanticweb.org/irina/ontologies/2024/0/bogx#>"
                 + "PREFIX dbr: <http://dbpedia.org/resource/>"
-                + "SELECT ?plant ?plantName ?plantDescription ?plantImageURL "
+                + "SELECT ?plant ?plantId ?plantName ?plantDescription ?plantImageURL "
                 + "WHERE { "
                 + "  ?plant a onto:Plant ;"
+                + "         onto:plantId ?plantId ;"
                 + "         onto:plantName ?plantName ;"
                 + "         onto:plantDescription ?plantDescription ;"
                 + "         onto:plantImageURL ?plantImageURL ;"
@@ -54,6 +55,7 @@ public class PlantService {
             while (results.hasNext()) {
                 QuerySolution solution = results.nextSolution();
                 Plant plant = new Plant();
+                plant.setPlantId(solution.getLiteral("plantId").getString());
                 plant.setPlantName(solution.getLiteral("plantName").getString());
                 plant.setPlantDescription(solution.getLiteral("plantDescription").getString());
                 plant.setPlantImageURL(solution.getLiteral("plantImageURL").getString());
@@ -63,14 +65,13 @@ public class PlantService {
         }
     }
 
-    public Plant getPlantDetailsFromSparqlQuery(String plantName, String plantSpecies) {
+    public Plant getPlantDetailsFromSparqlQuery(String plantId, String plantName, String plantSpecies) {
         String encodedPlantName = plantName.replace(" ", "_");
         String queryString = "PREFIX onto: <http://www.semanticweb.org/irina/ontologies/2024/0/bogx#>"
                 + "PREFIX dbr: <http://dbpedia.org/resource/>"
-                + "SELECT ?plantId ?plantDescription ?plantImageURL ?plantDiseases ?plantMaintenance ?latitudeMarker ?longitudeMarker "
+                + "SELECT ?plantDescription ?plantImageURL ?plantDiseases ?plantMaintenance ?latitudeMarker ?longitudeMarker "
                 + "WHERE { "
                 + " onto:" + encodedPlantName + " a onto:Plant ;"
-                + "         onto:plantId ?plantId ;"
                 + "         onto:plantDescription ?plantDescription ;"
                 + "         onto:plantImageURL ?plantImageURL ;"
                 + "         onto:plantDiseases ?plantDiseases ;"
@@ -89,7 +90,7 @@ public class PlantService {
             while (results.hasNext()) {
                 QuerySolution solution = results.nextSolution();
                 plant.setPlantName(plantName);
-                plant.setPlantId(solution.getLiteral("plantId").getString());
+                plant.setPlantId(plantId);
                 plant.setPlantDescription(solution.getLiteral("plantDescription").getString());
                 plant.setPlantImageURL(solution.getLiteral("plantImageURL").getString());
                 plant.setPlantDiseases(solution.getLiteral("plantDiseases").getString());

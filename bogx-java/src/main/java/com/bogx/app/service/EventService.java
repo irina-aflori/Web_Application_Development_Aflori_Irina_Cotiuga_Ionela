@@ -1,6 +1,7 @@
 package com.bogx.app.service;
 
 import com.bogx.app.model.Event;
+import com.bogx.app.model.Feedback;
 import com.bogx.app.model.Person;
 import org.apache.jena.query.*;
 import org.apache.jena.sparql.exec.http.QueryExecutionHTTP;
@@ -61,7 +62,7 @@ public class EventService {
         }
     }
     public void joinEvent(@PathVariable String eventId, @RequestBody Person person) {
-        String updateQuery = buildUpdateQuery(eventId, person);
+        String updateQuery = buildUpdateJoinEventQuery(eventId, person);
         executeUpdate(updateQuery);
     }
 
@@ -71,7 +72,7 @@ public class EventService {
         updateProcessor.execute();
     }
 
-    private String buildUpdateQuery(String eventId, Person person) {
+    private String buildUpdateJoinEventQuery(String eventId, Person person) {
         String queryString = "PREFIX onto: <http://www.semanticweb.org/irina/ontologies/2024/0/bogx#>\n" +
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
                 "DELETE {\n" +
@@ -117,6 +118,49 @@ public class EventService {
                 persons.add(person);
             }
             return persons;
+        }
+    }
+    public void addFeedbackToEvent(@PathVariable String eventId, @RequestBody Feedback feedback) {
+        String updateQuery = buildUpdateFeedbackEventQuery(eventId, feedback);
+        executeUpdate(updateQuery);
+    }
+    private String buildUpdateFeedbackEventQuery(String eventId, Feedback feedback) {
+        String queryString = "PREFIX onto: <http://www.semanticweb.org/irina/ontologies/2024/0/bogx#>\n" +
+                "INSERT {\n" +
+                "?event onto:hasEventFeedback ?feedback .\n" +
+                "?feedback a onto:EventFeedback ;  \n" +
+                "            onto:feedbackName \"" + feedback.getFeedbackName() + "\" ; \n" +
+                "            onto:feedbackComment \"" + feedback.getFeedbackComment() + "\" .\n" +
+                "}\n" +
+                "WHERE {\n" +
+                "    ?event onto:eventId \"" + eventId + "\" .\n" +
+                "    BIND(IRI(CONCAT(\"http://www.semanticweb.org/irina/ontologies/2024/0/bogx#EventFeedback\", STRUUID())) AS ?feedback)\n" +
+                "}";
+
+        return queryString;
+    }
+    public List<Feedback> getFeedbacksFromEvent(String eventId) {
+        String queryString = "PREFIX onto: <http://www.semanticweb.org/irina/ontologies/2024/0/bogx#>\n" +
+                "SELECT ?feedbackName ?feedbackComment\n" +
+                "WHERE {\n" +
+                "    ?event onto:eventId \"" + eventId + "\" .\n" +
+                "    ?event onto:hasEventFeedback ?feedback .\n" +
+                "    ?feedback onto:feedbackName ?feedbackName .\n" +
+                "    ?feedback onto:feedbackComment ?feedbackComment .\n" +
+                "}";
+        Query query = QueryFactory.create(queryString);
+        try (QueryExecution qe = QueryExecutionHTTP.service("http://localhost:3030/events/query").query(query).build();
+        ) {
+            ResultSet results = qe.execSelect();
+            List<Feedback> feedbacks = new ArrayList<>();
+            while (results.hasNext()) {
+                QuerySolution solution = results.nextSolution();
+                Feedback feedback = new Feedback();
+                feedback.setFeedbackName(solution.getLiteral("feedbackName").toString());
+                feedback.setFeedbackComment(solution.getLiteral("feedbackComment").toString());
+                feedbacks.add(feedback);
+            }
+            return feedbacks;
         }
     }
 }
