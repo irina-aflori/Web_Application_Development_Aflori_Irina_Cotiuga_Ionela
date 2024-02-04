@@ -9,6 +9,7 @@ public class Plant {
     private String plantMaintenance;
     private Double latitudeMarker;
     private Double longitudeMarker;
+    private String seasons;
 
     public Plant() {};
     public Plant(String plantName, String plantDescription, String plantImageURL, String plantDiseases, String plantMaintenance) {
@@ -81,5 +82,13 @@ public class Plant {
 
     public void setPlantId(String plantId) {
         this.plantId = plantId;
+    }
+
+    public String getSeasons() {
+        return seasons;
+    }
+
+    public void setSeasons(String seasons) {
+        this.seasons = seasons;
     }
 }
