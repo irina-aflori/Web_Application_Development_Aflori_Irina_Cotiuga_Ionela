@@ -1,0 +1,50 @@
+.comments-plant{
+    background-color: #e0e4da;
+    min-height: 54vw;
+}
+.comments-title{
+    color: #4A614A;
+    text-align: center;
+    margin-top: 3%;
+    font-style: oblique;
+    margin-bottom: 3%;
+}
+.comment-box{
+    background-color: #4A614A;
+    border-radius: 10px;
+    min-height: 190px;
+    width: 74%;
+    margin-left: 13%;
+    margin-right: 13%;
+    text-align: center;
+}
+#date-plant-comment, #plant-comment{
+    color: #E0E4DA;
+}
+#plant-comment{
+    margin-left: 4%;
+    margin-right: 4%;
+}
+#date-plant-comment {
+    font-style: oblique;
+    margin-bottom: 2%;
+    padding-top: 1%;
+}
+#plant-comment-img{
+    margin-top: 2%;
+    width: 30%;
+    height: 30%;
+    margin-bottom: 2%;
+    border-radius: 10px;
+}
+#name-plant-comment{
+    color: #E0E4DA;
+    font-weight: bold;
+    font-style: oblique;
+    font-size: larger;
+    padding-top: 2%;
+    text-shadow: -0.7px 0.7px 0 #000,
+    0.7px 0.7px 0 #000,
+    0.7px -0.7px 0 #000,
+    -0.7px -0.7px 0 #000;
+}

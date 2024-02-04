@@ -1,0 +1,33 @@
+.sidebar-link{
+display: flex;
+color: #E0E4DA;
+justify-content: space-between;
+align-items: center;
+padding: 20px;
+list-style: none;
+height: 42px;
+text-decoration: none;
+font-size: 18px;
+}
+.sidebar-link:hover{
+    background: #4A614A;
+    border-left: 4px solid black;
+    cursor: pointer;
+}
+.sidebar-label{
+    margin-left: 16px;
+}
+.drop-down{
+    /* background:#742240; */
+    height: 40px;
+    padding-left: 3rem;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #E0E4DA;
+    font-size: 18px;
+}
+.drop-down:hover{
+    background-color: #4A614A;
+    cursor: pointer;
+}

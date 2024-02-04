@@ -1,0 +1,48 @@
+.season-preferences{
+    background-color: #e0e4da;
+}
+#text-choose-season{
+    color: #4A614A;
+    text-align: center;
+    width: 70%;
+    margin-left: 15%;
+    padding-top: 2.5%;
+}
+.season-bottom-page{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2%;
+}
+#spring-season-choose, #summer-season-choose, #autumn-season-choose, #winter-season-choose {
+    width: 55%;
+    height: 50%;
+    margin-left: 35px;
+    margin-top: 20px;
+}
+.choose-season{
+    width: 155px;
+    height: 145px;
+    background-color: white;
+    border-radius: 10px;
+    background-clip: padding-box;
+    box-shadow: 0 0 10px #253625;
+}
+.season-box-text {
+    text-align: center;
+    color: #4A614A;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.season-text-choose{
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    margin-left: 15%;
+}
+#season-submit{
+    width: 90px;
+    height: 40px;
+    background-color: #4A614A;
+    color: #E0E4DA;
+    margin-left: 34%;
+}

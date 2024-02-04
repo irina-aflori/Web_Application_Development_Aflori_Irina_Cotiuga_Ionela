@@ -1,0 +1,65 @@
+.home{
+    background-color: #e0e4da;
+    /*min-height: 54vw;*/
+    /*height: auto;*/
+}
+.home-start {
+    margin-top: 9%;
+    margin-left: 10%;
+}
+#home-title {
+    padding-top: 1%;
+}
+#home-title, #home-subtitle{
+    text-align: center;
+    color: #4A614A;
+    width: 52%;
+    margin-left: 25%;
+}
+#home-subtitle{
+    font-style: italic;
+    font-size: medium;
+    padding-top: 1%;
+}
+#home-user-type{
+    color: #4A614A;
+    font-weight: bold;
+    font-style: oblique;
+    margin-top: 15%;
+    text-align: center;
+}
+.bottom-page{
+    display: flex;
+    margin-left: 10%;
+    justify-content: space-between;
+}
+.home-image{
+    width: 41%;
+    height: 41%;
+}
+.home-grid{
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    border-radius: 10px;
+    background-clip: padding-box;
+    box-shadow: 0 0 10px #253625;
+    padding: 10px;
+}
+.home-grid:hover{
+    box-shadow: 0 0 15px #061806;
+}
+#single-person-home, #group-children-home, #botanist-home {
+    width: 87%;
+    height: 70%;
+    margin-left: 25px;
+    margin-top: 12px;
+    border-radius: 10px;
+}
+.home-box-text {
+    color: #4A614A;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: large;
+}
