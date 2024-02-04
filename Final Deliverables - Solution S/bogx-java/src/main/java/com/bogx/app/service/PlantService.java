@@ -69,7 +69,8 @@ public class PlantService {
         String encodedPlantName = plantName.replace(" ", "_");
         String queryString = "PREFIX onto: <http://www.semanticweb.org/irina/ontologies/2024/0/bogx#>"
                 + "PREFIX dbr: <http://dbpedia.org/resource/>"
-                + "SELECT ?plantDescription ?plantImageURL ?plantDiseases ?plantMaintenance ?latitudeMarker ?longitudeMarker "
+                + "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+                + "SELECT ?plantDescription ?plantImageURL ?plantDiseases ?plantMaintenance ?latitudeMarker ?longitudeMarker (GROUP_CONCAT(DISTINCT ?season; separator=\", \") AS ?seasons) "
                 + "WHERE { "
                 + " onto:" + encodedPlantName + " a onto:Plant ;"
                 + "         onto:plantDescription ?plantDescription ;"
@@ -80,7 +81,10 @@ public class PlantService {
                 + "         dbr:" + plantSpecies + " onto:hasMarker ?marker .\n" +
                 "           ?marker onto:latitudeMarker ?latitudeMarker .\n" +
                 "           ?marker onto:longitudeMarker ?longitudeMarker ."
-                + "}";
+                + " dbr:" + plantSpecies + " onto:occursInSeason ?season ."
+//                + " ?seasonInstance rdf:type onto:Season ."
+                + "}"
+                + "GROUP BY ?plantDescription ?plantImageURL ?plantDiseases ?plantMaintenance ?latitudeMarker ?longitudeMarker";
 
         Query query = QueryFactory.create(queryString);
         try (QueryExecution qe = QueryExecutionHTTP.service("http://localhost:3030/plants/query").query(query).build();
@@ -97,6 +101,20 @@ public class PlantService {
                 plant.setPlantMaintenance(solution.getLiteral("plantMaintenance").getString());
                 plant.setLatitudeMarker(Double.valueOf(solution.getLiteral("latitudeMarker").getString()));
                 plant.setLongitudeMarker(Double.valueOf(solution.getLiteral("longitudeMarker").getString()));
+                String seasonUris = solution.getLiteral("seasons").getString();
+
+                String[] uris = seasonUris.split(", ");
+                StringBuilder seasonsBuilder = new StringBuilder();
+                for (int i = 0; i < uris.length; i++) {
+                    String[] parts = uris[i].split("#");
+                    if (parts.length > 1) {
+                        seasonsBuilder.append(parts[1]);
+                        if (i < uris.length - 1) {
+                            seasonsBuilder.append(", ");
+                        }
+                    }
+                }
+                plant.setSeasons(seasonsBuilder.toString());
             }
             return plant;
         }

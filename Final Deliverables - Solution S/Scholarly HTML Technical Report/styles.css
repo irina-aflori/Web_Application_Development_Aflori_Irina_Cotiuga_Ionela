@@ -89,3 +89,27 @@
     height: 500px;
     width: 45%;
 }
+.drawio-ss-double{
+    margin-left: 1%;
+    width: 35%;
+    height: 380px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.drawio-ss-marker{
+    margin-left: 1%;
+    width: 50%;
+    height: 380px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.drawio-ss-isPartOf{
+    margin-left: 1%;
+    width: 24%;
+    height: 380px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.bold{
+    font-weight: bold;
+}
