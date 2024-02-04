@@ -49,7 +49,9 @@
                 <dd><a class="content" href="#app-architecture">3.1 App Architecture</a></dd>
                 <dd><a class="content" href="#storage-system">3.2 RDF-based knowledge models & the modeling of our
                         ontology</a></dd>
-                <dd><a class="content" href="#api-specification">3.3 REST API specification</a></dd>
+                <dd><a class="content" href="#external-data">3.3 Pragmatic use of external data/knowledge sources &
+                        SPARQL queries</a></dd>
+                <dd><a class="content" href="#api-specification">3.4 REST API specification & Implemented API</a></dd>
 
                 <dt><a class="content" href="#interface-interaction">4. User interface interaction</a></dt>
                 <dd><a class="content" href="#landing-page">4.1 Landing Page</a></dd>
@@ -74,7 +76,9 @@
                         principles</a>
                 </dt>
                 <dd></dd>
-                <dt><a class="content" href="#conclusion">7. Conclusion</a></dt>
+                <dt><a class="content" href="#proj-progress">7. Project Progress</a></dt>
+                <dt><a class="content" href="#conclusion">8. Conclusion</a></dt>
+                <dt><a class="content" href="#bibliography">9. Bibliography</a></dt>
                 <dd></dd>
             </dl>
         </section>
@@ -111,42 +115,10 @@
         <section itemscope itemtype="https://schema.org/Article" role="doc-description">
             <h2 id="overall-description" class="title">2. Description</h2>
             <section>
-                <h3 id="user-classes">2.1 User types and features</h3>
-                <p itemprop="user-types"> There are three types of users that can use the application: simple visitor,
-                    advanced botanist
-                    and group of children. Users can access common functionalities, but there are also specific
-                    functionalities for each type of user.<br>
-                <ul>
-                    <li>
-                        A simple visitor is any person who visits the Botanical Garden in Iasi and wants to find out
-                        more
-                        information about the
-                        plants present in the garden, about the exhibitions in the garden and the events organized
-                        there.
-                    </li>
-                    <li>
-                        An advanced botanist is a professional or highly knowledgeable individual with expertise in the
-                        field of botany—the scientific study of plants.
-                        He can add additional information about a plant, thus contributing to the quality of the
-                        content. It
-                        can
-                        also ensure accuracy and correctness in the description of plants. This is essential to provide
-                        users with accurate and
-                        reliable information.
-                    </li>
-                    <li>
-                        Group of children. The application can also be used by children, offering an interactive and
-                        engaging way to learn about plants. It
-                        helps children learn to identify plants through visual characteristics so that they become aware
-                        of
-                        the diversity
-                        of plants around them. The application also includes for children a quiz that tests the basic
-                        knowledge in the
-                        field of botany, facilitating the assimilation of knowledge through play.
-                    </li>
-                </ul>
+                <h3 id="user-classes">2.1 User features</h3>
+                <p itemprop="user-types"> In this section we illustrate a Use Case diagram that highlights the
+                    navigation possibilities of a user, when accessing the application.<br>
                 </p>
-                <img class="img15" src="use-cases-diagram.png" alt="Use Cases Diagram">
                 <p class="caption">Use Cases Diagram</p>
             </section>
             <section>
@@ -159,7 +131,6 @@
                 </p>
             </section>
         </section>
-
         <section itemscope itemtype="https://schema.org/Article" role="doc-technologies">
             <h2 id="technologies-libraries" class="title">3. Technologies and libraries used</h2>
             <section>
@@ -248,7 +219,7 @@
                     The final step involves sending the processed data back to the user's device, completing the user
                     interaction loop.
                 </p>
-                <img class="img1" src="app-architecture-diagram.png" alt="Architecture Diagram">
+                <img class="img1" src="../Diagrams/app-architecture-diagram.png" alt="Architecture Diagram">
                 <p class="caption">App Architecture Diagram</p>
             </section>
             <section>
@@ -327,7 +298,7 @@
                         interact with their environment and respond to seasonal changes.
                     </li>
                     <img class="drawio-ss-marker" src="../Data Modeling/season-diagram.drawio.png"
-                    alt="Relation Plant Species - Season Modeling Diagram">
+                        alt="Relation Plant Species - Season Modeling Diagram">
                     <li>
                         <span class="bold">Marker:</span> a class that is used in the geographical and informational
                         mapping of a botanical garden. It includes data properties like latitudeMarker and
@@ -344,7 +315,7 @@
                         visitors with precise information on where to find particular plant species and offering visual
                         cues through the Marker's image.
                     </li>
-                    <img class="drawio-ss-marker" src="../Data Modeling/marker-diagram.drawio.png"
+                    <img class="drawio-ss-left" src="../Data Modeling/marker-diagram.drawio.png"
                         alt="Marker Modeling Diagram">
                     <img class="drawio-ss-double" src="../Data Modeling/plantSpecies-hasMarker-diagram.drawio.png"
                         alt="Relation Plant Species - Marker Modeling Diagram">
@@ -370,90 +341,283 @@
                     </li>
                     <img class="drawio-ss-marker" src="../Data Modeling/event-diagram.drawio.png"
                         alt="Event Modeling Diagram">
-                    <li>
-                        Feedback: a collection that is used for an event. A feedback contains a comment, a picture, and
-                        the author who made the comment.
+
+                    <li> <span class="bold">Person:</span> a class that represents individuals in the context of a
+                        system, focusing on capturing essential personal identifiers. This class has data
+                        properties lastNamePerson and firstNamePerson to store the last and first names of individuals.
+                        These properties facilitate the clear identification, sorting, and referencing of
+                        persons within various operations of the system, such as event registration and feedback
+                        submission.
                     </li>
+                    <li> <span class="bold">hasParticipant:</span> an object property that establishes a link
+                        between the Event class and the Person class, signifying that an individual (Person) is
+                        attending or participating in a specific event (Event). This relationship is essential for
+                        managing event logistics, such as tracking attendance, personalizing event experiences, and
+                        facilitating communication between event organizers and attendees.
+                    </li>
+                    <img class="drawio-ss-marker" src="../Data Modeling/event-participant-diagram.drawio.png"
+                        alt="Event Participation Modeling Diagram">
+                    <li> <span class="bold">Feedback:</span> a class that serves as a foundational structure designed to
+                        capture and organize user input regarding various aspects of the system, particularly focusing
+                        on user experiences with events and plants. It primarily includes the feedbackComment data
+                        property, which allows users to articulate their thoughts, suggestions, and overall impressions
+                        in a textual format.
+                    </li>
+                    <li> <span class="bold">EventFeedback:</span> a subclass of class Feedback that is concentrating on
+                        experiences related to events hosted or facilitated by the system. It inherits the generic
+                        feedbackComment but also includes a unique feedbackName property. This property allows for the
+                        association of feedback with specific events or aspects thereof, providing a label or title to
+                        the feedback entry. This specificity aids in the categorization and analysis of feedback, making
+                        it easier for organizers to identify areas of success or aspects needing attention, thereby
+                        directly contributing to the enhancement of future event planning and execution.
+                    </li>
+                    <li> <span class="bold">hasEventFeedback:</span> an object property that stablishes a link
+                        between the Event class and its associated EventFeedback, indicating that specific feedback is
+                        directly related to a particular event. This relationship allows for the collection,
+                        organization, and analysis of feedback specific to each event, enabling event organizers to
+                        gauge participant satisfaction, identify areas for improvement, and understand the overall
+                        impact of the event on its attendees.
+                    </li>
+                    <img class="drawio-ss-marker" src="../Data Modeling/feedback-diagram.drawio.png"
+                        alt="Event Feedback Modeling Diagram">
+                    <li> <span class="bold">PlantFeedback:</span> a subclass of class Feedback that focuses specifically
+                        on user responses related to individual plants or plant species within the system. In addition
+                        to inheriting the feedbackComment property, it introduces feedbackDate and feedbackImage
+                        properties. The feedbackDate property records the date on which the feedback was provided,
+                        allowing for temporal analysis of user feedback. The feedbackImage property enables users to
+                        upload visual evidence or reflections, enriching the feedback with visual context.
+                    </li>
+                    <li> <span class="bold">hasPlantFeedback:</span> an object property that forms a connection
+                        between individual Plant entities and PlantFeedback, signifying the association of specific user
+                        feedback with a particular plant or plant species. This linkage is instrumental in compiling
+                        detailed insights and observations from users regarding plant health, aesthetics, informational
+                        content, or visitor experiences related to the plant. Facilitating a direct channel for
+                        receiving feedback, this property enables botanists, gardeners, and educators to monitor and
+                        enhance the care, presentation, and educational value of plants based on real-world interactions
+                        and impressions captured through PlantFeedback.
+                    </li>
+                    <img class="drawio-ss-marker" src="../Data Modeling/plant-feedback-diagram.drawio.png"
+                        alt="Plant Feedback Modeling Diagram">
                 </ul>
             </section>
             <section>
-                <h3 id="api-specification">3.3 REST API specification</h3>
+                <h3 id="external-data">3.3 Pragmatic use of external data/knowledge sources & SPARQL queries</h3>
+                <p>We opted for using the DBpedia tool as a knowledge source for our ontology, so that all plant species
+                    and the plants within a species have information from DBpedia. We chose this source because it
+                    managed to enrich the ontology with scientific names, classifications, descriptions, and relevant
+                    images. This method saved time and resources compared to manually compiling such detailed
+                    information. Among the benefits of this approach is also the fact that we wanted a platform meant to
+                    offer educational, real, and important information and it managed to turn the app into a powerful
+                    learning tool. Additionally, the information and links between resources provided by DBpedia helped
+                    us form a taxonomy, a classification of plants into different plant species.</p>
+                <p> Adding information from DBpedia into our ontology and the method of integrating and using this
+                    information involved several necessary steps:
+                <ul>
+                    <li>researching on the website <a href="https://www.dbpedia.org/">https://www.dbpedia.org/</a> to
+                        see possible information that would be
+                        useful in our application;</li>
+                    <li>finding resources for the desired plant species, in accordance with those found in the botanical
+                        garden (an example would be <a
+                            href="https://dbpedia.org/page/Chrysanthemum">https://dbpedia.org/page/Chrysanthemum</a>)
+                        and determining the
+                        necessary information for our application - in the case of plant species, we chose to display
+                        the name and image for each species;</li>
+                    <li>finding resources for each plant, creating a hierarchy so that each plant belongs to a plant
+                        species, and determining the details about a plant that we want to extract: name, description,
+                        image, etc;</li>
+                    <li>executing SPARQL queries from the ontology found in DBpedia <a
+                            href="http://dbpedia.org/ontology/">http://dbpedia.org/ontology/</a> to
+                        extract exactly the desired information;</li>
+                    <li>populating our ontology with information extracted from DBpedia;</li>
+                </ul>
+                </p>
+                <p> Several examples of SPARQL queries used to extract the desired information from DBpedia are:
+                <ul>
+                    <li>SPARQL query for retrieving data about plant species Chrysanthemum: </li>
+                    <img class="sparql-img1" src="./images/sparql_dbpedia_plant_species.png"
+                        alt="SPARQL DBpedia Plant Species">
+                    <li>SPARQL query for retrieving data about plants that are part of Chrysanthemum species:</li>
+                    <img class="sparql-img2" src="./images/sparql_dbpedia_plant.png" alt="SPARQL DBpedia Plant">
+                </ul>
+                </p>
+
+            </section>
+            <section>
+                <h3 id="api-specification">3.4 REST API specification & Implemented API</h3>
                 <p>
-                    The REST API specification for Bogx web application, was created using Swagger and adhering to
-                    the OpenAPI 3.0 standard. The REST API specification serves a pivotal role in enabling effective
+                    The REST API specification serves a pivotal role in enabling effective
                     communication between the frontend React.js application and the backend Java application. It defines
                     the
                     endpoints, request-response formats, and the underlying data structures, providing a standardized
                     interface
                     for interaction. <br>
-
-                    The <strong>"/plants/categories"</strong> endpoint is used for retrieving and showcasing plant
-                    categories
-                    stored in the database. Users can explore diverse plant categories and make selections to view
-                    associated
-                    plants within their chosen category.<br>
-                    <br> Endpoint URL:
+                <p>We will present some of the most illustrative APIs of our application, to detail the implementation
+                    part:</p>
                 <ul>
-                    <li>
-                        <strong>Path: /plants/categories</strong>
-                    </li>
-                </ul>
-                <br> HTTP Method:
-                <ul>
-                    <li>
-                        <strong>GET - Returns all plants categories that exist in the database.</strong>
-                    </li>
-                </ul>
-                <br> Parameters:
-                <ul>
-                    <li>
-                        <strong>No parameters.</strong>
-                    </li>
-                </ul>
-                <br> Responses:
-                <ul>
-                    <li>
-                        <strong>Success Responses: 200 OK - Successful retrieval of plant categories.</strong>
-                        <br> <br> Example value:
+                    <li>The <strong>"http://localhost:8081/api/plantSpecies/plants/{plantId}"</strong> endpoint is used
+                        for retrieving and showcasing the detailed information about a plant that is part of a specific
+                        plant species.
+                        <br> Endpoint URL:
+                        <ul>
+                            <li>
+                                <strong>Path: http://localhost:8081/api/plantSpecies/plants/{plantId}</strong>
+                            </li>
+                        </ul>
+                        <br> HTTP Method:
+                        <ul>
+                            <li>
+                                <strong>GET - Returns the information about a plant that has a specific plantId</strong>
+                            </li>
+                        </ul>
+                        <br> Parameters:
+                        <ul>
+                            <li>
+                                <p><strong>Path Variable: plantId</strong></p>
+                                <p><strong>Request Param: plantName</strong></p>
+                                <p><strong>Request Param: plantSpecies</strong></p>
+                            </li>
+                        </ul>
+                        <p>This Java method performs several key functions related to querying a SPARQL endpoint,
+                            processing the results, and populating a Plant object with the data obtained. It constructs
+                            a SPARQL query string using string concatenation:
+                            <img class="drawio-ss-marker" src="./images/sparql_plant_details.png"
+                                alt="SPARQL query plant details">
+                            <br>
+                            This SPARQL query retrieves detailed attributes of a specific plant from
+                            an integrated ontology, including its description, image URL, diseases, maintenance needs,
+                            geographical marker coordinates, and the seasons it occurs in, aggregating these seasons
+                            into a single, comma-separated string. By leveraging both internal ontology definitions and
+                            external DBpedia resources, it enriches the plant's data profile, facilitating a
+                            comprehensive understanding suitable for educational, research, or gardening applications.
+                            <br>
+                            It executes the constructed SPARQL query against a SPARQL service running at
+                            <strong>http://localhost:3030/plants/query</strong> (on the Fuseki Server, having the
+                            dataset named
+                            "plants"). Then, it iterates over the query results, creating a new Plant object and setting
+                            its properties based on the SPARQL query's output and it returns this object, which now
+                            contains comprehensive information about the plant, including its associated seasons as
+                            derived from the RDF data.
+                        </p>
+                        <br> Result:
                         <pre><code class="json" id="jsonCode">
-[
-  {
-    "id": 1,
-    "name": "Roses",
-    "plants": [
-      {
-        "id": 1,
-        "speciesCategory": [
-          "string"
-        ],
-        "plantName": "Rosa 'Flower Carpet Red'",
-        "description": "A great deciduous ground cover rose which forms low mounds of growth to around 70cm tall and 1m wide.",
-        "flowersDescription": "Small flowered groundcover rose which produces small single deep red flowers with yellow centre in clusters throughout spring and summer. Foliage is dark green and glossy and is often tinged red when it first unfurls. It matures to dark green with burgundy edges.",
-        "site": "This rose will perform at its best in full sun with moist but well-drained soil but will tolerate part shade. Good air circulation helps prevent pests and diseases. Drought tolerant once established.",
-        "maintananceTips": "The first summer and autumn after planting is critical for young plants; water thoroughly during dry periods. A good rule of thumb is to give your roses one deep watering each week in dry times this will ensure the roots look for water themselves.",
-        "diseases": "This flower carpet rose has good resistance to the common rose diseases. However, it may still be affected by black spot, aphids and powdery mildew.",
-        "soilPreparation": "Always choose healthy well grown plants and plant after autumn rains as the soil is moist and warm and allows plants to become established before winter. This enables them to withstand dry periods during the following summer.",
-        "seasonOccurrence": [
-          [
-            "SPRING",
-            "SUMMER",
-            "AUTUMN",
-            "WINTER"
-          ]
-        ],
-        "plantPhoto": "string",
-        "location": "Iasi Botanical Garden"
-      }
-    ]
-  }
-]
-                                </code></pre>
+                            {
+                                "plantName": "Castanea crenata",
+                                "plantId": "urn:uuid:90982369-5fa6-4ce9-a8cf-9c2491b22116",
+                                "plantDescription": "Castanea crenata, the Japanese chestnut, also known as the Korean chestnut is a species of chestnut native to Japan and Korea. Castanea crenata exhibits resistance to Phytophthora cinnamomi, the fungal pathogen that causes ink disease in several Castanea species. The mechanism of resistance of Castanea crenata to Phytophthora cinnamomi may derive from its expression of the Cast_Gnk2-like gene.",
+                                "plantImageURL": "http://commons.wikimedia.org/wiki/Special:FilePath/Castanea_crenata3.jpg?width=300",
+                                "plantDiseases": "Anthracnose fungus disease occurs in the late spring and early summer, especially if spring is cool and wet. Anthracnose is most prominent on the lower half of the tree and shows spots or lesions that range from tan to reddish brown or black. Root feeding is strongly recommended to help the tree combat the disease.\nDutch Elm disease is the most destructive shade tree disease. Dutch elm disease causes serious economic and aesthetic losses in cities and towns where the elms are the principal shade tree.\nPoplar Cankers is a fungus disease whose activity results in cankers or physical deformities.",
+                                "plantMaintenance": "Schedule a cleanup for dead, diseased and cluttered branches. It’s easy to spot cluttered branches. They’ll grow at odd angles, grow inward toward the tree’s center, or brush too closely against other branches.\nNever cut a branch flush to its trunk. Prune above the branch bark ridge and branch collar. Cutting a tree limb flush to the trunk compromises the tree’s ability to heal and fight off disease.\nUse the right pruning tools for the job. Use a hand pruner for branches under 1/2\".  Use loppers to cut branches up to 1”.  A pruning hand saw be used for branches over 1/2”. But never use a carpenter’s saw.",
+                                "latitudeMarker": 47.183574482701665,
+                                "longitudeMarker": 27.548175138593205,
+                                "seasons": "Spring, Summer, Autumn"
+                            }
+                                                            </code></pre>
                     </li>
                     <li>
-                        <strong>Error Responses: 404 Not Found - Plants categories not found.</strong>
+                        The <strong>"http://localhost:8081/api/events/{eventId}/join"</strong> endpoint is used
+                        for adding a new person that wants to join an event.
+                        <br> Endpoint URL:
+                        <ul>
+                            <li>
+                                <strong>Path: http://localhost:8081/api/events/{eventId}/join</strong>
+                            </li>
+                        </ul>
+                        <br> HTTP Method:
+                        <ul>
+                            <li>
+                                <strong>PUT - Add a new person to the list of joined people for an event that has a
+                                    specific eventId</strong>
+                            </li>
+                        </ul>
+                        <br> Parameters:
+                        <ul>
+                            <li>
+                                <p><strong>Path Variable: eventId</strong></p>
+                                <p><strong>Request Body: person</strong></p>
+                            </li>
+                        </ul>
+                        <p>This Java method constructs
+                            a SPARQL query string for update using string concatenation:
+                            <img class="drawio-ss-marker" src="./images/sparql_event_join.png"
+                                alt="SPARQL query join event">
+                            <br>
+                            This SPARQL query dynamically updates an event's participant count and adds a new
+                            participant (person) to the event within an ontology. It is structured into three main
+                            sections: DELETE, INSERT, and WHERE. The DELETE clause removes the current participant count
+                            (?currentCount) for an event (?event) to prepare for updating this information. The INSERT
+                            clause
+                            inserts the updated participant count (?newCount), incremented by 1 or initialized to 1 if
+                            no count was previously recorded,
+                            creates a new Person instance (?newPerson) with the first name and last name provided by the
+                            person object, and
+                            associates the new Person instance with the event by using the onto:hasParticipant property.
+                            The WHERE clause
+                            identifies the specific event (?event) by its eventId,
+                            optionally matches the current participant count if it exists,
+                            uses the BIND function to calculate the new participant count, incrementing the existing
+                            count by 1 or defaulting to 1 if no count exists, and
+                            generates a new unique URI for the Person instance using the STRUUID() function to ensure a
+                            unique identifier for each new participant.
+                            <br>
+                            It executes the constructed SPARQL query against a SPARQL service running at
+                            <strong>http://localhost:3030/events/update</strong> (on the Fuseki Server, having the
+                            dataset named
+                            "events"). Then, it creates a new Person object and sets
+                            its properties based on the SPARQL query's output and increments the participant count for
+                            the specific event.
+                        </p>
+                    </li>
+                    <li>The <strong>"http://localhost:8081/api/plantSpecies/seasonRecommendations"</strong> endpoint is
+                        used
+                        for selecting only the plant species that occurs in one of the seasons that the user selected
+                        (this functionality works as a recommendation, based on a completed form).
+                        <br> Endpoint URL:
+                        <ul>
+                            <li>
+                                <strong>Path: http://localhost:8081/api/plantSpecies/seasonRecommendations</strong>
+                            </li>
+                        </ul>
+                        <br> HTTP Method:
+                        <ul>
+                            <li>
+                                <strong>GET - Returns the information about plant species that occurs in one of the seasons selected by user in a form.</strong>
+                            </li>
+                        </ul>
+                        <br/>
+                    </li>
+                    <li>The <strong>"http://localhost:8081/api/feedback/{plantId}/feedbackPlant"</strong> endpoint is used
+                        for adding a new feedback for a specific plant, after completing a form in Plant Details Page.
+                        <br> Endpoint URL:
+                        <ul>
+                            <li>
+                                <strong>Path: http://localhost:8081/api/feedback/{plantId}/feedbackPlant</strong>
+                            </li>
+                        </ul>
+                        <br> HTTP Method:
+                        <ul>
+                            <li>
+                                <strong>PUT - Add a new feedback to a plant that has a
+                                    specific plantId</strong>
+                            </li>
+                        </ul>
+                        <br/>
+                    </li>
+                    <li>The <strong>"http://localhost:8081/api/markers"</strong> endpoint is used
+                        for displaying the information about markers that will be used in the interactive map.
+                        <br> Endpoint URL:
+                        <ul>
+                            <li>
+                                <strong>Path: http://localhost:8081/api/markers</strong>
+                            </li>
+                        </ul>
+                        <br> HTTP Method:
+                        <ul>
+                            <li>
+                                <strong>GET - Get a list with all detailed information about markers</strong>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
-
                 </p>
             </section>
         </section>
@@ -465,13 +629,13 @@
             <section>
                 <p>These are some of the initial mockups created with the help of the Figma tool:</p>
                 <div class="multiple-images">
-                    <img class="img7" src="5-figma-events.png" alt="Events list">
-                    <img class="img8" src="6-figma-join-event.png" alt="Event join form">
-                    <img class="img9" src="7-figma-feedback-event.png" alt="Event feedback form">
+                    <img class="img7" src="./images/5-figma-events.png" alt="Events list">
+                    <img class="img8" src="./images/6-figma-join-event.png" alt="Event join form">
+                    <img class="img9" src="./images/7-figma-feedback-event.png" alt="Event feedback form">
                 </div>
                 <div class="multiple-images">
-                    <img class="img11" src="9-figma-plants-page.png" alt="Plants Page">
-                    <img class="img12" src="10-figma-plant-informations.png" alt="Plant Information Page">
+                    <img class="img11" src="./images/9-figma-plants-page.png" alt="Plants Page">
+                    <img class="img12" src="./images/10-figma-plant-informations.png" alt="Plant Information Page">
                 </div>
             </section>
             <section>
@@ -483,7 +647,7 @@
                     the
                     next page.
                 </p>
-                <img class="page-ss" src="mainpage.png" alt="Landing Page">
+                <img class="page-ss" src="./images/mainpage.png" alt="Landing Page">
             </section>
             <section>
                 <h3 id="seasons-select">4.2 Favorite seasons Form Page</h3>
@@ -492,7 +656,7 @@
                     based on these choices. The user can check from one season to all the seasons displayed. This page
                     features a static horizontal header at the top containing the logo and the main menu of the website.
                 </p>
-                <img class="page-ss" src="season-selection.png" alt="Season selection">
+                <img class="page-ss" src="./images/season-selection.png" alt="Season selection">
             </section>
             <section>
                 <h3 id="map-interaction">4.3 Map Page</h3>
@@ -514,8 +678,8 @@
                     the route, user can click "Clear route" button and the map will be recentered to the initial
                     position.</p>
                 <div class="multiple-images">
-                    <img class="page-ss-double" src="map-start.png" alt="Map">
-                    <img class="page-ss-double" src="map-route.png" alt="Map">
+                    <img class="page-ss-double" src="./images/map-start.png" alt="Map">
+                    <img class="page-ss-double" src="./images/map-route.png" alt="Map">
                 </div>
             </section>
             <section>
@@ -528,7 +692,7 @@
                     types of organized events may include guided tours, exhibitions for certain plants, seasonal
                     exhibitions, nature conservation events against pollution, events that teach how to plant or
                     classify different types of plants, caring for the animals in the Botanical Garden, and more.</p>
-                <img class="page-ss" src="events-list.png" alt="Events list">
+                <img class="page-ss" src="./images/events-list.png" alt="Events list">
             </section>
             <section>
                 <h3 id="join-event">4.5 Join an event Form</h3>
@@ -538,7 +702,7 @@
                     registering for events through our application ensures an easy way to create a list of attendees,
                     avoiding potential queues. Users can access this form by clicking on the 'Join' button attached to
                     each event.</p>
-                <img class="page-ss" src="join-event.png" alt="Event join form">
+                <img class="page-ss" src="./images/join-event.png" alt="Event join form">
             </section>
             <section>
                 <h3 id="join-event-view">4.6 View persons who joined an event</h3>
@@ -547,7 +711,7 @@
                     available. This table is useful both for checking if a person who has registered appears in the
                     table,
                     and for transparency in filling the available spots for each event.</p>
-                <img class="page-ss" src="events-view-joined.png" alt="View event joined list">
+                <img class="page-ss" src="./images/events-view-joined.png" alt="View event joined list">
             </section>
             <section>
                 <h3 id="feedback-event">4.7 Add a feedback to an event Page</h3>
@@ -557,13 +721,13 @@
                     desired comments. This form can be accessed by
                     users by clicking the 'Tell us about your experience' button available in the box of each past
                     event.</p>
-                <img class="page-ss" src="add-feedback.png" alt="Event feedback form">
+                <img class="page-ss" src="./images/add-feedback.png" alt="Event feedback form">
             </section>
             <section>
                 <h3 id="feedback-event-vew">4.8 View feedback for an event</h3>
                 <p itemprop="feedbackEventView">For each past event, the user can access a feedback list, where they can
                     view all the comments and opinions of people who have participated in that event.</p>
-                <img class="page-ss" src="view-feedback.png" alt="Event feedback view">
+                <img class="page-ss" src="./images/view-feedback.png" alt="Event feedback view">
             </section>
             <section>
                 <h3 id="plants-species-page">4.9 Plant category page</h3>
@@ -578,7 +742,7 @@
                     Botanical Garden of Iasi are Rose, Chrysanthemum, Medicinal Plants, Pine, Tulip, Deciduous, and
                     others.
                 </p>
-                <img id="page-plant" src="plants-species.png" alt="Plants Page">
+                <img id="page-plant" src="./images/plants-species.png" alt="Plants Page">
             </section>
             <section>
                 <h3 id="plants-page">4.10 Plants from a specific category page</h3>
@@ -590,7 +754,7 @@
                     Rosa
                     carolina, Rosa persica and others.
                 </p>
-                <img id="page-plants" src="roses-plants.png" alt="Plants Page">
+                <img id="page-plants" src="./images/roses-plants.png" alt="Plants Page">
             </section>
             <section>
                 <h3 id="plant-information">4.11 Plant informations page</h3>
@@ -604,8 +768,8 @@
                     plant and its characteristics.
                 </p>
                 <div class="multiple-images">
-                    <img class="page-ss-plant-details" src="plant-details.png" alt="Plant Information Page">
-                    <img class="page-ss-plant-details" src="plant-details-2.png" alt="Plant Information Page">
+                    <img class="page-ss-plant-details" src="./images/plant-details.png" alt="Plant Information Page">
+                    <img class="page-ss-plant-details" src="./images/plant-details-2.png" alt="Plant Information Page">
                 </div>
             </section>
             <section>
@@ -613,7 +777,7 @@
                 <p itemprop="PlantsAddComment"> This form is accessed from the details of a plant and offers users the
                     possibility to add a comment and a picture for this plant.
                 </p>
-                <img class="page-ss" src="add-comment-plant.png" alt="Add Comment Form">
+                <img class="page-ss" src="./images/add-comment-plant.png" alt="Add Comment Form">
             </section>
             <section>
                 <h3 id="plant-view-comments">4.13 View all comments/feedbacks for plants</h3>
@@ -621,7 +785,8 @@
                     plants. In this way, a clearer overview of the Iasi Botanical Garden and the plants found in it can
                     be
                     visualized.</p>
-                <img class="page-ss-plant-comments" src="comments-plants.png" alt="View comments for plants Page">
+                <img class="page-ss-plant-comments" src="./images/comments-plants.png"
+                    alt="View comments for plants Page">
             </section>
             <section>
                 <h3 id="taxes">4.14 View taxes and services for entrance to Iasi Botanical Garden Page</h3>
@@ -630,7 +795,7 @@
                     wish to visit the Botanical Garden for various purposes (whether it's attending events, visiting
                     plants,
                     having a photo session, etc.).</p>
-                <img class="page-ss" src="taxes.png" alt="Taxes and Services Page">
+                <img class="page-ss" src="./images/taxes.png" alt="Taxes and Services Page">
             </section>
         </section>
 
@@ -643,7 +808,7 @@
                     an app flow diagram, which presents the navigation possibilities available to a user when accessing
                     our
                     system.</p>
-                <img class="flow-diagram" src="app-flow-diagram.png" alt="App Flow Diagram">
+                <img class="flow-diagram" src="../Diagrams/app-flow-diagram.png" alt="App Flow Diagram">
                 <section>
                     <h4 id="feature2">5.1.1 Choosing favorite seasons</h4>
                     <p itemprop="seasonSelect">It allows the user to select their favorite seasons (the seasons of
@@ -823,9 +988,77 @@
                 species and all plants from every species have data description from DBPedia.
             </div>
         </section>
-
+        <section itemscope itemtype="https://schema.org/Article" role="doc-proj-progress">
+            <h2 id="proj-progress" class="title">7. Project Progress</h2>
+            <p>
+                The development of the project unfolded in a structured and systematic manner, incorporating a variety
+                of technologies and methodologies to ensure a robust and user-friendly application. Here's an outline of
+                the project development progress:
+            <ul>
+                <li> <span class="bold"> Initial planning and requirements set:</span> The project began with an
+                    analysis of the application
+                    requirements. This initial phase involved identifying the core functionalities, target user base,
+                    and the overall goal of the application. Decisions on what technologies to use were made during this
+                    phase, focusing on a stack that includes React for the frontend, Java Spring Boot for the backend,
+                    and Apache Jena Fuseki as the RDF store for managing the ontology.</li>
+                <li><span class="bold">UI/UX design with Figma:</span> Figma was chosen to design the user interface for
+                    its collaborative
+                    features
+                    and ease of use. Mockups for the application's UI were created, offering a visual representation of
+                    the user experience and ensuring that the design met the project's needs and goals.</li>
+                <li><span class="bold">System architecture and diagrams:</span> To better understand and communicate the
+                    structure of the
+                    application, we developed some diagrams: architecture diagrams to depict how the
+                    different components of the system interact, flow diagrams and use case diagrams to outline the user
+                    journey through
+                    the application.</li>
+                <li><span class="bold">Ontology modeling:</span> We opted to use Protégé for this
+                    task, starting with the definition of classes, data properties, and object properties that represent
+                    the domain of interest. This ontology serves as the backbone of the application, facilitating the
+                    semantic organization of information.</li>
+                <li><span class="bold">Ontology population:</span> The ontology was populated with data from various
+                    sources:
+                    <ul>
+                        <li>For plant and plant species information, SPARQL queries against DBpedia were used to extract
+                            and import relevant data.</li>
+                        <li>The list of taxes and services was inspired by the official site of the Iasi Botanical
+                            Garden, ensuring local relevance and accuracy.</li>
+                        <li>Event data was crafted based on user needs analysis, focusing on events that would engage
+                            and interest the target audience.</li>
+                        <li>Participant names for events were generated using mock data from Mockaroo, simulating
+                            realistic user interaction.</li>
+                    </ul>
+                </li>
+                <li><span class="bold">Development of the React application:</span> A React application was created to
+                    serve as the front end. This involved developing views for each system component, ensuring a
+                    responsive and intuitive user interface that interacts seamlessly with the backend.</li>
+                <li> <span class="bold">Backend development with Java Spring Boot:</span> The backend application was
+                    developed using Java Spring
+                    Boot, known for its efficiency and ease of use in creating services. This component handles
+                    business logic, data processing, and communication with the Apache Jena Fuseki server.</li>
+                <li><span class="bold">Integration with Apache Jena Fuseki Server:</span> Our ontology, hosted on the
+                    Apache Jena Fuseki server, was used as an RDF store. This setup enables sophisticated query and
+                    update capabilities for the ontology, using SPARQL for data interrogation and manipulation.
+                </li>
+                <li><span class="bold">Creating and implementing endpoints:</span> Endpoints were created in the backend
+                    to facilitate communication between the frontend and the RDF store. This involved crafting SPARQL
+                    queries to retrieve or modify data within the Fuseki server according to the application's
+                    functionality needs and add some method implementation for our functionalities.</li>
+                <li><span class="bold">Creating a GoogleMaps JavaScript API map in our app:</span> We researched how to
+                    create a map, how to set the map and desired coordinates, how to add markers, how to interact with
+                    the map, and how to follow the route and directions between two points on the map.</li>
+                <li><span class="bold">Connecting frontend to backend:</span> The final phase involved linking the
+                    frontend React application with the Java Spring Boot backend, ensuring smooth data flow and
+                    functionality across the system.</li>
+                <li><span class="bold">Iterative documentation:</span> As the project progressed from planning through
+                    development to integration, maintaining comprehensive documentation remained a continuous effort.
+                    This included updating technical documents, user guides, and API documentation to reflect the
+                    system's current state and capabilities.</li>
+            </ul>
+            </p>
+        </section>
         <section itemscope itemtype="https://schema.org/Article" role="doc-conclusion">
-            <h2 id="conclusion" class="title">7. Conclusion</h2>
+            <h2 id="conclusion" class="title">8. Conclusion</h2>
             <p itemprop="conclusion">The presented application named "Botanical Gardens Smart Explorer" proposes an
                 interesting idea of displaying and interacting with the environment of the Botanical Garden in Iasi. It
                 aims to facilitate the process of information and documentation, creating an optimal environment to
@@ -847,6 +1080,27 @@
                 collection of animals and other fauna inhabiting the garden. By selecting an individual element, it will
                 be nice to access detailed information about its species, behaviors, habitat, and unique
                 characteristics.</p>
+        </section>
+        <section itemscope itemtype="https://schema.org/Article" role="doc-bibliography">
+            <h2 id="bibliography" class="title">9. Bibliography</h2>
+            <ul>
+                <li>DBpedia Website: <a href=" https://www.dbpedia.org/"> https://www.dbpedia.org/</a></li>
+                <li>Apache Jena Framework: <a href="https://jena.apache.org/">https://jena.apache.org/</a></li>
+                <li>Apache Jena Fuseki Server: <a
+                        href="https://jena.apache.org/documentation/fuseki2/">https://jena.apache.org/documentation/fuseki2/</a>
+                </li>
+                <li>Google Maps JavaScript API: <a
+                        href="https://developers.google.com/maps/documentation/javascript/overview">https://developers.google.com/maps/documentation/javascript/overview</a>
+                </li>
+                <li>Spring Boot: <a
+                        href="https://spring.io/projects/spring-boot">https://spring.io/projects/spring-boot</a></li>
+                <li>React Js Framework: <a href="https://react.dev/">https://react.dev/</a></li>
+                <li>Yasgui for SPARQL queries: <a href="https://yasgui.triply.cc/">https://yasgui.triply.cc/</a></li>
+                <li>Drawio RDF diagrams: <a
+                        href="https://app.diagrams.net/?src=about">https://app.diagrams.net/?src=about</a></li>
+                <li>Figma tool: <a href="https://www.figma.com/">https://www.figma.com/</a></li>
+                <li>Swagger Editor: <a href="https://editor.swagger.io/">https://editor.swagger.io/</a></li>
+            </ul>
         </section>
     </article>
 
