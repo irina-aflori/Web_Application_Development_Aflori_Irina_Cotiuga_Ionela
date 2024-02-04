@@ -98,7 +98,14 @@
 }
 .drawio-ss-marker{
     margin-left: 1%;
-    width: 50%;
+    width: 70%;
+    height: 380px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.drawio-ss-left{
+    margin-left: 1%;
+    width: 60%;
     height: 380px;
     margin-top: 1%;
     margin-bottom: 1%;
@@ -112,4 +119,25 @@
 }
 .bold{
     font-weight: bold;
+}
+.use-case-img{
+    height: 45%;
+    width: 30%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 2%;
+}
+.sparql-img1{
+    width: 60%;
+    height: 250px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 20%;
+}
+.sparql-img2{
+    width: 60%;
+    height: 300px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 20%;
 }
