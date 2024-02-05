@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>User Guide Bogx (Botanical gardens smart explorer)</title>
+    <link rel="stylesheet" href="../Scholarly HTML Technical Report/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js"></script>
+
+</head>
+
+<body prefix="schema: http://schema.org" class="background">
+    <article itemscope itemtype="https://schema.org/ScholarlyArticle" class="alignment">
+        <header>
+            <h1 itemprop="headline">User Guide Bogx (Botanical gardens smart explorer)</h1>
+        </header>
+
+        <div role="contentinfo">
+            <dl>
+                <dt>Authors</dt>
+                <dd itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    Aflori Irina
+                    &amp;
+                    Cotiugă Ionela
+                </dd>
+                <dt>Affiliation</dt>
+                <dd itemprop="organization" itemscope itemtype="https://schema.org/Organization">Faculty of Computer
+                    Science, "Alexandru Ioan Cuza" University in Iași
+                </dd>
+            </dl>
+        </div>
+        <section id="index">
+            <h2 class="title">Table of contents</h2>
+            <dl>
+                <dt><a class="content" href="#abstract">Abstract</a></dt>
+                <dd></dd>
+
+                <dt><a class="content" href="#interface-interaction">1. User interface interaction</a></dt>
+                <dd><a class="content" href="#landing-page">1.1 Landing Page</a></dd>
+                <dd><a class="content" href="#seasons-select">1.2 Favorite seasons Form Page</a></dd>
+                <dd><a class="content" href="#map-interaction">1.3 Map Page</a></dd>
+                <dd><a class="content" href="#events-page">1.4 Events Page</a></dd>
+                <dd><a class="content" href="#join-event">1.5 Join an event Page</a></dd>
+                <dd><a class="content" href="#feedback-event">1.6 Add a feedback to an event Page</a></dd>
+                <dd><a class="content" href="#plants-species-page">1.7 Plant category page</a></dd>
+                <dd><a class="content" href="#plants-page">1.8 Plants from a specific category page</a></dd>
+                <dd><a class="content" href="#plant-information">1.9 Plant informations page</a></dd>
+                <dd><a class="content" href="#plant-add-comment">1.10 Add a comment/feedback to a plant</a></dd>
+                <dd><a class="content" href="#plant-view-comments">1.11 View all comments/feedbacks for plants</a></dd>
+                <dd><a class="content" href="#taxes"> 1.12 View taxes and services for entrance to Iasi Botanical Garden
+                        Page</a></dd>
+
+                <dt><a class="content" href="#use-cases">2. Use cases</a>
+                </dt>
+                <dd><a class="content" href="#use-case-1">2.1 An user wants to see the details of a plant from a specific species</a></dd>
+                <dd><a class="content" href="#use-case-2">2.2 An user wants to see the plants species from a specifiec season</a></dd>
+                <dd><a class="content" href="#use-case-3">2.3 An user wants to see the map of the Iasi Botanical Garden</a></dd>
+                <dd><a class="content" href="#use-case-4">2.4 An user wants to see the events from the Iasi Botanical Garde</a></dd>
+            </dl>
+        </section>
+
+        <section itemscope itemtype="https://schema.org/Article" role="doc-abstract">
+            <h2 itemprop="abstract" id="abstract" class="title">Abstract</h2>
+            <p itemprop="description">
+                    This document is designed for users of the Bogx application, offering thorough explanations about the 
+                    implemented functionalities, the various pages within the application, and instructions 
+                    on how users can effectively utilize them.</p>
+            <p itemprop="motivation">Bogx (Botanical Gardens Smart Explorer) is a Web application designed to offer
+                users interested in
+                the botanical field an innovative, intuitive, and easy way to access information about plants,
+                filtered
+                according to their own preferences, as well as a method to interact with scheduled
+                events at the Botanical Garden in Iasi. The map of the Iasi Botanical Garden provided in the
+                application offers an overview of the location of plants in that area.</p>
+            <p itemprop="mainPurpose">The main purpose of the application is to provide a digital and modern way of
+                displaying educational
+                information about various species of plants, allowing users to explore the Iasi
+                Botanical Garden through an interactive map.</p>
+        </section>
+
+        <section itemscope itemtype="https://schema.org/Article" role="doc-user-interaction">
+            <h2 id="interface-interaction" class="title">1. User interface interaction</h2>
+            <p>In this section, we will detail the most important pages of our application, creating a small guide for
+                users.</p>
+            <section>
+                <h3 id="landing-page">1.1 Landing Page</h3>
+                <p itemprop="mainPage">The main page, the entry point into the application, offers the user the
+                    possibility
+                    to start navigating our website. The users will
+                    click on the "Start your experience in our application" button, and then they will be redirected to
+                    the
+                    next page.
+                </p>
+                <img class="page-ss" src="../Scholarly HTML Technical Report/images/mainpage.png" alt="Landing Page">
+            </section>
+            <section>
+                <h3 id="seasons-select">1.2 Favorite seasons Form Page</h3>
+                <p itemprop="seasons">On this page, the user selects their favorite seasons to filter all the plants
+                    species
+                    based on these choices. The user can check from one season to all the seasons displayed. This page
+                    features a static horizontal header at the top containing the logo and the main menu of the website.
+                </p>
+                <img class="page-ss" src="../Scholarly HTML Technical Report/images/season-selection.png" alt="Season selection">
+            </section>
+            <section>
+                <h3 id="map-interaction">1.3 Map Page</h3>
+                <p itemprop="map">This page illustrates the interactive map of the Botanical Garden in Iasi. Users can
+                    see
+                    the geographic coordinates of every clicked point on the map.
+                    <br />
+                    On the left side, users can visualize and track areas marked with a specific marker to locate them
+                    more
+                    easily. Every plant species has a marker with an intuitive image (for example, the chrysanthemum
+                    plant
+                    species has as marker-icon a chrysanthemum image).
+                </p>
+                <p itemprop="menu">On the right side, it is illustrated the directions - route functionality. Users can
+                    select a
+                    route from the entrance of the Botanical Garden to a chosen species of plant. By clicking the "Show
+                    route" button, the user can select a specific marker and the route will be displayed. After
+                    exploring
+                    the route, user can click "Clear route" button and the map will be recentered to the initial
+                    position.</p>
+                <div class="multiple-images">
+                    <img class="page-ss-double" src="../Scholarly HTML Technical Report/images/map-start.png" alt="Map">
+                    <img class="page-ss-double" src="../Scholarly HTML Technical Report/images/map-route.png" alt="Map">
+                </div>
+            </section>
+            <section>
+                <h3 id="events-page">1.4 Events Page</h3>
+                <p itemprop="events">The events page is divided into two categories: a list of scheduled events that
+                    will
+                    take place in
+                    the near future and a list of events which have already taken place. Therefore, users can see what
+                    types of events are organized at the Iasi Botanical Garden and can plan to participate in them. The
+                    types of organized events may include guided tours, exhibitions for certain plants, seasonal
+                    exhibitions, nature conservation events against pollution, events that teach how to plant or
+                    classify different types of plants, caring for the animals in the Botanical Garden, and more.</p>
+                <img class="page-ss" src="../Scholarly HTML Technical Report/images/events-list.png" alt="Events list">
+            </section>
+            <section>
+                <h3 id="join-event">1.5 Join an event Form</h3>
+                <p itemprop="joinEvent">Users can fill out a form with their names to participate in a specific event.
+                    Generally, events
+                    organized in the Iasi Botanical Garden have a limited number of spots available. Therefore,
+                    registering for events through our application ensures an easy way to create a list of attendees,
+                    avoiding potential queues. Users can access this form by clicking on the 'Join' button attached to
+                    each event.</p>
+                <img class="page-ss" src="../Scholarly HTML Technical Report/images/join-event.png" alt="Event join form">
+            </section>
+            <section>
+                <h3 id="join-event-view">1.6 View persons who joined an event</h3>
+                <p itemprop="joinEventView">For each future event, a table with the names of the people who have joined
+                    is
+                    available. This table is useful both for checking if a person who has registered appears in the
+                    table,
+                    and for transparency in filling the available spots for each event.</p>
+                <img class="page-ss" src="../Scholarly HTML Technical Report/images/events-view-joined.png" alt="View event joined list">
+            </section>
+            <section>
+                <h3 id="feedback-event">1.7 Add a feedback to an event Page</h3>
+                <p itemprop="feedbackEvent">Users can give a feedback for a past event they attended by filling out a
+                    form
+                    with their name and
+                    desired comments. This form can be accessed by
+                    users by clicking the 'Tell us about your experience' button available in the box of each past
+                    event.</p>
+                <img class="page-ss" src="../Scholarly HTML Technical Report/images/add-feedback.png" alt="Event feedback form">
+            </section>
+            <section>
+                <h3 id="feedback-event-vew">1.8 View feedback for an event</h3>
+                <p itemprop="feedbackEventView">For each past event, the user can access a feedback list, where they can
+                    view all the comments and opinions of people who have participated in that event.</p>
+                <img class="page-ss" src="../Scholarly HTML Technical Report/images/view-feedback.png" alt="Event feedback view">
+            </section>
+            <section>
+                <h3 id="plants-species-page">1.9 Plant category page</h3>
+                <p itemprop="plantsPage">The Plant Category Page offers a curated display of diverse plant species.
+                    Users
+                    can
+                    effortlessly explore each category, gaining insights into species details and each plant belonging
+                    to
+                    that category. The plant species are filtered according to the recommendations resulting from the
+                    user
+                    completing the form with the selection of the desired seasons. Among the plant species found in the
+                    Botanical Garden of Iasi are Rose, Chrysanthemum, Medicinal Plants, Pine, Tulip, Deciduous, and
+                    others.
+                </p>
+                <img id="page-plant" src="../Scholarly HTML Technical Report/images/plants-species.png" alt="Plants Page">
+            </section>
+            <section>
+                <h3 id="plants-page">1.10 Plants from a specific category page</h3>
+                <p itemprop="plantsPage">This page displays all plants from the specific plant species. After selecting
+                    a
+                    plant species, users can
+                    view a list with the name and the image of every plant. For example,for the plant species Roses, we
+                    displayed more than 60 plants. Some of the plants are Garden Roses, Rosa agrestis, Rosa banksiae,
+                    Rosa
+                    carolina, Rosa persica and others.
+                </p>
+                <img id="page-plants" src="../Scholarly HTML Technical Report/images/roses-plants.png" alt="Plants Page">
+            </section>
+            <section>
+                <h3 id="plant-information">1.11 Plant informations page</h3>
+                <p itemprop="PlantInformation">This page displays information about a specific plant such as: the
+                    scientific
+                    name, the family
+                    it belongs to and specific characteristics such as maintenance and growth, pests and disease,
+                    flowers
+                    and foliage and the location of the plant in the botanical garden. In this way, the user can view
+                    each
+                    plant and its characteristics.
+                </p>
+                <div class="multiple-images">
+                    <img class="page-ss-plant-details" src="../Scholarly HTML Technical Report/images/plant-details.png" alt="Plant Information Page">
+                    <img class="page-ss-plant-details" src="../Scholarly HTML Technical Report/images/plant-details-2.png" alt="Plant Information Page">
+                </div>
+            </section>
+            <section>
+                <h3 id="plant-add-comment">1.12 Add a comment/feedback to a plant</h3>
+                <p itemprop="PlantsAddComment"> This form is accessed from the details of a plant and offers users the
+                    possibility to add a comment and a picture for this plant.
+                </p>
+                <img class="page-ss" src="../Scholarly HTML Technical Report/images/add-comment-plant.png" alt="Add Comment Form">
+            </section>
+            <section>
+                <h3 id="plant-view-comments">1.13 View all comments/feedbacks for plants</h3>
+                <p itemprop="PlantsViewComments"> This page displays all comments and feedback provided by a user for
+                    plants. In this way, a clearer overview of the Iasi Botanical Garden and the plants found in it can
+                    be
+                    visualized.</p>
+                <img class="page-ss-plant-comments" src="../Scholarly HTML Technical Report/images/comments-plants.png" alt="View comments for plants Page">
+            </section>
+            <section>
+                <h3 id="taxes">1.14 View taxes and services for entrance to Iasi Botanical Garden Page</h3>
+                <p itemprop="Taxes"> This page displays the list of fees and services necessary to be known by people
+                    who
+                    wish to visit the Botanical Garden for various purposes (whether it's attending events, visiting
+                    plants,
+                    having a photo session, etc.).</p>
+                <img class="page-ss" src="../Scholarly HTML Technical Report/images/taxes.png" alt="Taxes and Services Page">
+            </section>
+        </section>
+
+        <section itemscope itemtype="https://schema.org/Article" role="doc-app-functionalities">
+            <h2 id="use-cases" class="title">2. Use cases</h2>
+            <section>
+                <section>
+                <h3 id="use-case-1">2.1 An user wants to see the details of a plant from a specific species</h3>
+                    <ul>
+                        <li>
+                            Users begin by accessing the Bogx application.
+                        </li>
+                        <li>
+                            Within the main menu, they navigate to the "plants and plant species" tab.
+                        </li>
+                        <li>
+                            Initially, they encounter a list showcasing various plant species.
+                        </li>
+                        <li>
+                            Upon choosing a specific plant species of interest, a dedicated page unfolds.
+                        </li>
+                        <li>
+                            This page provides several plants that are part belonging to the selected plant species category.
+                        </li>
+                        <li>
+                            Users have the option to pick a plant from the displayed list, triggering the opening of a dedicated page containing 
+                            comprehensive plant details. This information encompasses characteristics and descriptions, maintenance tips, 
+                            insights on pests and diseases, the specific location within the Iasi Botanical Garden, and the seasonal 
+                            occurrence of the chosen plant.
+                        </li>
+                    </ul>
+                    <img class="drawio-ss-use-case" src="../Diagrams/Diagram-use-case-1.png" alt="View use case diagram for plant details">
+                </section>
+                <section>
+                <h3 id="use-case-2">2.2 An user wants to see the plants species from a specifiec season</h3>
+                    <ul>
+                        <li>
+                            Users begin by accessing the Bogx application. 
+                        </li>
+                        <li>
+                            This action will redirect to a form-style page displaying the four seasons.
+                        </li>
+                        <li>
+                            It can be choosed the preferred seasons by selecting a number between 1 and 4, indicating the 
+                            periods user wish to explore for associated plants.
+                        </li>
+                        <li>
+                            Upon selection, the application will guide to a page featuring plant species specific to the chosen seasons.
+                        </li>
+                        <li>
+                            Each plant will have in its details, the season of its occurrence.
+                        </li>
+                    </ul>
+                    <img class="drawio-ss-use-case" src="../Diagrams/Diagram-use-case-2.png" alt="View use case diagram for plant species from a specific season">
+                </section>
+                <section>
+                <h3 id="use-case-3">2.3 An user wants to see the map of the Iasi Botanical Garden</h3>
+                    <ul>
+                        <li>
+                            Users begin by accessing the Bogx application.
+                        </li>
+                        <li>
+                            Within the main menu, they navigate to the "Map" tab.
+                        </li>
+                        <li>
+                            The map page will be displayed, showing the Iasi Botanical Garden.
+                        </li>
+                        <li>
+                            Users can visualize and track areas marked with a specific marker to locate them more easily.
+                        </li>
+                        <li>
+                            On the right side, it is illustrated the directions - route functionality. Users can select a route from the entrance 
+                            of the Botanical Garden to a chosen species of plant. By clicking the "Show route" button, the user can select a specific
+                             marker and the route will be displayed. After exploring the route, user can click "Clear route" button and the map will
+                              be recentered to the initial position.
+                        </li>
+                    </ul>
+                    <img class="drawio-ss-use-case" src="../Diagrams/Diagram-use-case-3.png" alt="View use case diagram for map">
+                </section>
+                <section>
+                <h3 id="use-case-4">2.4 An user wants to see the events from the Iasi Botanical Garden</h3>
+                    <ul>
+                        <li>
+                            Users begin by accessing the Bogx application.
+                        </li>
+                        <li>
+                            Within the main menu, they navigate to the "Events" tab.
+                        </li>
+                        <li>
+                            The events page will be displayed, showing the list of scheduled events that will take place in the near future and a list of events 
+                            which have already taken place.
+                        </li>
+                        <li>
+                            Users can see what types of events are organized at the Iasi Botanical Garden and can plan to participate in them.
+                        </li>
+                        <li>
+                            It can also give a feedback for a past event they attended by filling out a form with their name and desired comments.
+                        </li>
+                    </ul>
+                    <img class="drawio-ss-use-case" src="../Diagrams/Diagram-use-case-4.png" alt="View use case diagram for events">
+                </section>
+            </section>
+        </section>
+    </article>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
