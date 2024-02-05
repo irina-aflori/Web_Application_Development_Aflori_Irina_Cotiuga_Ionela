@@ -33,9 +33,11 @@
 
 ## About The Project
 
-Bogx (Botanical Gardens Smart Explorer) is a Web application designed to offer users interested in the botanical field an innovative, intuitive, and easy way to access information about plants and fauna, filtered according to their own preferences, as well as a method to interact with scheduled events at the Botanical Garden in Iasi. The map of the Iasi Botanical Garden provided in the application offers an overview of the location of plants and fauna in that area.
+Bogx (Botanical Gardens Smart Explorer) is a Web application designed to offer users interested in the botanical field an innovative, intuitive, and easy way to access information about plants, filtered according to their own preferences, as well as a method to interact with scheduled events at the Botanical Garden in Iasi. The map of the Iasi Botanical Garden provided in the application offers an overview of the location of plants species in that area.
 
-This repository currently contains a description of the Botanical Gardens Smart Explorer project. A Scholarly HTML Technical Report can be found that presents the detailed description of the application as well as its main functionalities. Diagrams illustrating the flow of the application and its architecture can also be viewed. This documentation also includes figma mockups that illustrate how the application pages will look and an OpenApi specification presenting the endpoints that will be used for communication between the frontend React.js application and the backend Java application.
+This repository contains a description of the Botanical Gardens Smart Explorer project. A Scholarly HTML Technical Report can be found that presents the detailed description of the application as well as its main functionalities. Diagrams illustrating the flow of the application and its architecture can also be viewed. This documentation also includes a user guide report that helps new users get familiar with the app's interface, features, and functionalities.
+
+The link to the video demo: https://youtu.be/Zx99eoKc2M0
 
 <!-- ### Built With -->
 
